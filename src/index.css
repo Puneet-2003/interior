@@ -1,0 +1,24 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-serif: 'Merriweather', Georgia, serif;
+  --font-sans: 'Merriweather', Georgia, serif;
+  --color-dhi-bg: #0a0a0a;
+  --color-dhi-teal: #26a69a;
+  --color-dhi-forest: #1a3d36;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-dhi-bg);
+  color: #e4e4e7;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100svh;
+}

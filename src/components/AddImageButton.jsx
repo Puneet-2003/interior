@@ -33,7 +33,7 @@ export function AddImageButton({
       {open && (
         <form
           onSubmit={submit}
-          className="absolute right-0 top-full z-40 mt-2 w-[min(360px,90vw)] border border-cream-deep bg-white p-4 shadow-[0_12px_40px_rgba(60,40,30,0.12)]"
+          className="absolute right-0 top-full z-40 mt-2 w-[min(360px,90vw)] border border-cream-deep bg-white p-4 shadow-[0_12px_40px_rgba(74,10,22,0.14)]"
         >
           <p className="font-script text-lg text-rose-dust">Add to this section</p>
           <p className="mt-1 text-xs leading-relaxed text-ink-muted">

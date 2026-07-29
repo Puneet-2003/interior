@@ -5,13 +5,13 @@
   --font-sans: 'Jost', 'Segoe UI', sans-serif;
   --font-script: 'Great Vibes', cursive;
 
-  --color-cream: #faf7f2;
-  --color-cream-deep: #ebe4d8;
-  --color-ink: #2c2420;
-  --color-ink-muted: #6b5e56;
-  --color-rose-dust: #b08984;
-  --color-rose-deep: #8f6a66;
-  --color-blush: #f3ebe7;
+  --color-cream: #ffffff;
+  --color-cream-deep: #eed8dc;
+  --color-ink: #2a0710;
+  --color-ink-muted: #6f4b52;
+  --color-rose-dust: #9b1b30;
+  --color-rose-deep: #6d0f21;
+  --color-blush: #fdf3f4;
 }
 
 html {
@@ -33,6 +33,14 @@ body {
 
 .font-script {
   font-family: var(--font-script);
+}
+
+/* Deep velvet sheen: highlight from the top-left, shadow pooling bottom-right */
+.velvet-panel {
+  background-color: var(--color-rose-dust);
+  background-image:
+    radial-gradient(ellipse 70% 90% at 18% 0%, rgba(255, 255, 255, 0.22), transparent 62%),
+    radial-gradient(ellipse 80% 100% at 88% 110%, rgba(0, 0, 0, 0.45), transparent 60%);
 }
 
 /* Tailwind v4 preflight resets buttons to `cursor: default` */

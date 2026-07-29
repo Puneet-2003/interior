@@ -41,7 +41,7 @@ export function Functions() {
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
         style={{
           backgroundImage:
-            'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(176,137,132,0.18), transparent 55%)',
+            'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(155,27,48,0.16), transparent 55%)',
         }}
         aria-hidden
       />
@@ -49,7 +49,7 @@ export function Functions() {
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
         <motion.div {...fadeUp} className="text-center">
           <p className="font-script text-3xl text-rose-dust md:text-4xl">What we host</p>
-          <div className="mx-auto mt-5 inline-block bg-rose-dust px-10 py-4">
+          <div className="velvet-panel mx-auto mt-5 inline-block px-10 py-4 shadow-[0_14px_40px_rgba(109,15,33,0.28)]">
             <h2 className="font-serif text-3xl font-medium text-white md:text-4xl">Our Best Services</h2>
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink-muted md:text-lg">

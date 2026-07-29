@@ -29,7 +29,7 @@ export function Header() {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || open
-          ? 'bg-cream/95 shadow-[0_8px_30px_rgba(60,40,30,0.08)] backdrop-blur-md'
+          ? 'bg-cream/95 shadow-[0_8px_30px_rgba(74,10,22,0.10)] backdrop-blur-md'
           : 'bg-gradient-to-b from-ink/55 via-ink/25 to-transparent'
       }`}
     >

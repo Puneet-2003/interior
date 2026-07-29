@@ -37,7 +37,7 @@ export function Inquiry() {
       <div className="relative mx-auto max-w-3xl px-5 md:px-8">
         <motion.div
           {...fadeUp}
-          className="border border-cream-deep bg-white px-6 py-12 shadow-[0_20px_60px_rgba(60,40,30,0.08)] md:px-14 md:py-16"
+          className="border border-cream-deep bg-white px-6 py-12 shadow-[0_20px_60px_rgba(74,10,22,0.10)] md:px-14 md:py-16"
           style={{ borderRadius: '50% / 8%' }}
         >
           <div className="text-center">

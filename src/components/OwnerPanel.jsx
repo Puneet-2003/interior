@@ -301,7 +301,7 @@ export function OwnerPanel() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 16, scale: 0.96 }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed bottom-5 right-5 z-[60] w-[min(360px,calc(100vw-2rem))] border border-cream-deep bg-white shadow-[0_20px_60px_rgba(60,40,30,0.18)]"
+          className="fixed bottom-5 right-5 z-[60] w-[min(360px,calc(100vw-2rem))] border border-cream-deep bg-white shadow-[0_20px_60px_rgba(74,10,22,0.20)]"
         >
           <div className="flex items-center justify-between border-b border-cream-deep px-4 py-3">
             <div>

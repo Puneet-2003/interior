@@ -23,58 +23,52 @@ export function isVideoUrl(url) {
   return VIDEO_EXTENSION.test(url) || url.includes('/video/upload/')
 }
 
-/** Shared starter set — replace with Cloudinary URLs per subcategory */
+/** Keys must match functionCategories item ids in functions.js */
 const weddingDefaults = {
-  'roka-ceremony': [],
-  'engagement-ring-ceremony': [],
-  sagai: [],
-  mehendi: [],
-  haldi: [],
-  sangeet: [],
-  'cocktail-party': [],
-  'bachelor-bachelorette-party': [],
-  'wedding-ceremony': [],
-  baraat: [],
-  reception: [],
-  vidaai: [],
-  'griha-pravesh': [],
-  'anniversary-celebrations': [],
-  'vow-renewal-ceremony': [],
+  'engagement-ring-ceremony': [
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/See_The_Most_Stunning_Indian-American_Wedding_hxecdb.jpg',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320822/Celebrations25_Festive25_WeddingWire2026_n3bd94.jpg',
+  ],
+  'mehendi-haldi': [
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321040/Flower_themed_Haldi___Haldi_Ideas___Haldi_Inspo___yh7xnc.jpg',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321039/download_rxyp1x.jpg',
+  ],
+  'wedding-ceremony': [
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321038/Indian_Wedding_Phere_rwge20.jpg',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320821/A_wedding_filled_with_soft_florals_golden_light_and_timeless_emotion__From_intimate_moments_beneath_the_mandap_to_quiet_glances_that_spoke_louder_than_words_every_detail_of_this_celebration_captured_the_beauty_of_m_kkh51f.jpg',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/marriage_talambralu_swh01f.jpg',
+  ],
+  'baraat-reception': [
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/Wedding_Photography_feuc26.jpg',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_2_a80bce.jpg',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_vadwhi.jpg',
+  ],
 }
 
 const babyDefaults = {
-  'baby-shower-godh-bharai': [],
-  'naming-ceremony-naamkaran': [],
-  'annaprashan-first-rice-ceremony': [],
-  'mundan-ceremony': [],
-  'ear-piercing-ceremony-karnavedha': [],
-  'birthday-parties': [],
-  'sweet-16-18th-birthday': [],
-  'gender-reveal-party': [],
-  'baby-welcome-party': [],
-  'family-reunions': [],
+  'baby-shower-godh-bharai': [
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_1_v8uenc.jpg',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321038/download_1_c1jc3u.jpg',
+  ],
+  'naming-ceremony-naamkaran': [
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_vadwhi.jpg',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320822/Celebrations25_Festive25_WeddingWire2026_n3bd94.jpg',
+  ],
 }
 
 const religiousDefaults = {
-  'satyanarayan-katha': [],
-  'ram-katha': [],
-  'bhagwat-katha': [],
-  'sundarkand-path': [],
-  'hanuman-chalisa-path': [],
-  'mata-ki-chowki': [],
-  jagran: [],
-  'hawan-yagya': [],
-  rudrabhishek: [],
-  'navratri-garba-dandiya': [],
-  'ganesh-chaturthi-celebration': [],
-  'durga-puja': [],
-  'janmashtami-celebration': [],
-  'diwali-pooja': [],
-  'lakshmi-pooja': [],
-  'griha-pravesh-pooja': [],
-  'bhoomi-pujan': [],
-  'vastu-pooja': [],
-  'temple-events': [],
+  'satyanarayan-katha': [
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_2_a80bce.jpg',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321038/Indian_Wedding_Phere_rwge20.jpg',
+  ],
+  'bhagwat-katha': [
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/See_The_Most_Stunning_Indian-American_Wedding_hxecdb.jpg',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/marriage_talambralu_swh01f.jpg',
+  ],
+  'sundarkand-path': [
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321040/Flower_themed_Haldi___Haldi_Ideas___Haldi_Inspo___yh7xnc.jpg',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/Wedding_Photography_feuc26.jpg',
+  ],
 }
 
 /** Default Cloudinary-ready image arrays keyed by page/section id */
@@ -111,7 +105,7 @@ export const pageImages = {
   
   ],
   testimonials: [
-    'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=900&q=80',
+    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320821/A_wedding_filled_with_soft_florals_golden_light_and_timeless_emotion__From_intimate_moments_beneath_the_mandap_to_quiet_glances_that_spoke_louder_than_words_every_detail_of_this_celebration_captured_the_beauty_of_m_kkh51f.jpg',
   ],
 }
 

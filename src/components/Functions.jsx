@@ -145,7 +145,7 @@ export function Functions() {
                     <p className="mt-2 text-base text-ink-muted">
                       {unlocked
                         ? 'Use Add image and paste a Cloudinary URL for this subcategory.'
-                        : 'Unlock owner mode to add Cloudinary images for this function.'}
+                        : 'Gallery photos for this function will appear here soon.'}
                     </p>
                   </div>
                 )}

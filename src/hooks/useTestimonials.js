@@ -1,8 +1,9 @@
-import { useCallback, useSyncExternalStore } from 'react'
+import { useCallback, useEffect, useSyncExternalStore } from 'react'
 import {
   addTestimonial,
   getTestimonialsSnapshot,
   isCustomTestimonial,
+  loadTestimonials,
   removeTestimonial,
   subscribeTestimonials,
 } from '../data/testimonialStore'
@@ -13,17 +14,27 @@ export function useTestimonials() {
     getTestimonialsSnapshot,
     getTestimonialsSnapshot,
   )
-  const items = JSON.parse(serialized)
+  const { loaded, items } = JSON.parse(serialized)
 
-  const add = useCallback((payload) => {
-    addTestimonial(payload)
+  useEffect(() => {
+    loadTestimonials()
   }, [])
 
-  const remove = useCallback((id) => {
-    removeTestimonial(id)
+  const add = useCallback((payload) => addTestimonial(payload), [])
+
+  // Called straight from an onClick, so failure resolves false rather than
+  // rejecting. The store puts the testimonial back if the delete fails.
+  const remove = useCallback(async (id) => {
+    try {
+      await removeTestimonial(id)
+      return true
+    } catch (err) {
+      console.error(err)
+      return false
+    }
   }, [])
 
   const isCustom = useCallback((id) => isCustomTestimonial(id), [])
 
-  return { items, add, remove, isCustom }
+  return { items, loaded, add, remove, isCustom }
 }

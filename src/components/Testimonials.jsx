@@ -12,7 +12,7 @@ export function Testimonials() {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
   const { images } = usePageImages('testimonials')
-  const { items, remove } = useTestimonials()
+  const { items, loaded, remove } = useTestimonials()
   const { unlocked } = useOwnerMode()
   const item = items[Math.min(index, Math.max(0, items.length - 1))]
 
@@ -53,7 +53,9 @@ export function Testimonials() {
         {!item ? (
           <div className="border border-dashed border-cream-deep bg-white/70 px-6 py-12 text-center">
             <p className="font-serif text-base text-ink-muted">
-              No testimonials yet. Use Owner tools → Add testimonial to upload one.
+              {loaded
+                ? 'No testimonials yet. Use Owner tools → Testimonial to add one.'
+                : 'Loading testimonials…'}
             </p>
           </div>
         ) : (

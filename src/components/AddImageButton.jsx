@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { useAddImageForm } from '../hooks/usePageImages'
 import { useOwnerMode } from '../hooks/useOwnerMode'
 
@@ -9,7 +10,8 @@ export function AddImageButton({
   subcategoryLabel,
 }) {
   const { unlocked } = useOwnerMode()
-  const { open, setOpen, url, setUrl, error, submit } = useAddImageForm(path)
+  const { open, setOpen, url, setUrl, error, busy, submit, pickFile } = useAddImageForm(path)
+  const fileRef = useRef(null)
 
   if (!unlocked) return null
 
@@ -33,9 +35,10 @@ export function AddImageButton({
           onSubmit={submit}
           className="absolute right-0 top-full z-40 mt-2 w-[min(360px,90vw)] border border-cream-deep bg-white p-4 shadow-[0_12px_40px_rgba(60,40,30,0.12)]"
         >
-          <p className="font-script text-lg text-rose-dust">Cloudinary link</p>
+          <p className="font-script text-lg text-rose-dust">Add to this section</p>
           <p className="mt-1 text-xs leading-relaxed text-ink-muted">
-            Paste a Cloudinary delivery URL for this section — image, GIF, or video (.mp4 / .webm).
+            Upload a file from this device, or paste a delivery URL — image, GIF, or video (.mp4 /
+            .webm). Saved for everyone.
           </p>
 
           {hasTaxonomy && (
@@ -65,6 +68,26 @@ export function AddImageButton({
           )}
 
           <input
+            ref={fileRef}
+            type="file"
+            accept="image/*,video/*"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0]
+              e.target.value = ''
+              if (file) pickFile(file)
+            }}
+          />
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => fileRef.current?.click()}
+            className="mt-3 w-full border border-rose-dust/50 px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-ink transition hover:border-rose-dust hover:bg-blush disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {busy ? 'Uploading…' : 'Upload from this device'}
+          </button>
+
+          <input
             type="url"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
@@ -76,9 +99,10 @@ export function AddImageButton({
           <div className="mt-3 flex gap-2">
             <button
               type="submit"
-              className="flex-1 bg-rose-dust px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-rose-deep"
+              disabled={busy}
+              className="flex-1 bg-rose-dust px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-rose-deep disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Save
+              {busy ? 'Saving…' : 'Save'}
             </button>
             <button
               type="button"

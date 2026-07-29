@@ -8,10 +8,17 @@
  *   functions.baby.mehendi
  *   functions.religious.mata-ki-chowki
  *
- * Extra URLs added via the UI are stored in localStorage and merged at runtime.
+ * Extra URLs added via the UI live in the Supabase `site_images` table and are
+ * merged with these defaults at runtime. localStorage is kept only as an offline
+ * mirror so a returning visitor sees content before the network responds.
  */
 
+import { isSupabaseConfigured, supabase } from '../lib/supabaseClient'
+
 export const STORAGE_KEY = 'dhi-cloudinary-images'
+
+const TABLE = 'site_images'
+const EVENT = 'dhi-images-change'
 
 const VIDEO_EXTENSION = /\.(mp4|webm|ogv|mov|m4v)(\?|#|$)/i
 const IMAGE_EXTENSION = /\.(gif|jpe?g|png|webp|avif|svg)(\?|#|$)/i
@@ -96,17 +103,93 @@ export const pageImages = {
   ],
 }
 
-function readExtras() {
+function readMirror() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? JSON.parse(raw) : {}
+    const parsed = raw ? JSON.parse(raw) : {}
+    return parsed && typeof parsed === 'object' ? parsed : {}
   } catch {
     return {}
   }
 }
 
-function writeExtras(extras) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(extras))
+let extrasCache = readMirror()
+let loaded = !isSupabaseConfigured
+let inFlight = null
+
+function readExtras() {
+  return extrasCache
+}
+
+function setExtras(next) {
+  extrasCache = next
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+  } catch {
+    // Private browsing or a full quota — the in-memory copy still works.
+  }
+  window.dispatchEvent(new Event(EVENT))
+}
+
+function groupRows(rows) {
+  const grouped = {}
+  for (const row of rows) {
+    const list = grouped[row.section_path] ?? (grouped[row.section_path] = [])
+    if (!list.includes(row.url)) list.push(row.url)
+  }
+  return grouped
+}
+
+/**
+ * First run against an empty table: copy up anything that was added back when
+ * this browser was the only storage, so nothing disappears.
+ */
+async function copyMirrorToSupabase() {
+  const pending = Object.entries(extrasCache).flatMap(([section_path, urls]) =>
+    (Array.isArray(urls) ? urls : []).map((url) => ({ section_path, url })),
+  )
+  if (!pending.length) return []
+
+  const { data, error } = await supabase.from(TABLE).insert(pending).select('section_path, url')
+  if (error) {
+    console.error('Could not copy this browser’s images into Supabase.', error)
+    return pending
+  }
+  return data ?? pending
+}
+
+async function fetchImages() {
+  try {
+    const { data, error } = await supabase
+      .from(TABLE)
+      .select('section_path, url')
+      .order('created_at', { ascending: true })
+    if (error) throw error
+
+    const rows = data?.length ? data : await copyMirrorToSupabase()
+    loaded = true
+    setExtras(groupRows(rows))
+  } catch (error) {
+    // Keep the mirrored copy visible and allow a later retry.
+    console.error('Could not load images from Supabase.', error)
+  }
+  return extrasCache
+}
+
+/** Fetch every saved image once per page load. */
+export function loadImages() {
+  if (loaded || !isSupabaseConfigured) return Promise.resolve(extrasCache)
+  if (inFlight) return inFlight
+
+  inFlight = fetchImages().finally(() => {
+    inFlight = null
+  })
+
+  return inFlight
+}
+
+export function areImagesLoaded() {
+  return loaded
 }
 
 /** Flatten nested defaults for a path like "home.about" or "functions.wedding.haldi" */
@@ -187,24 +270,49 @@ export function getImages(path) {
   return [...defaults, ...added]
 }
 
-/** Append a Cloudinary (or other) image URL to a section; returns updated list */
-export function addImage(path, url) {
+/** Save an image URL for a section so every visitor sees it. */
+export async function addImage(path, url) {
   const trimmed = url.trim()
   if (!trimmed) return getImages(path)
-  const extras = readExtras()
-  const list = Array.isArray(extras[path]) ? extras[path] : []
-  if (!list.includes(trimmed) && !getDefaultImages(path).includes(trimmed)) {
-    extras[path] = [...list, trimmed]
-    writeExtras(extras)
+
+  const previous = extrasCache
+  const list = Array.isArray(previous[path]) ? previous[path] : []
+  if (list.includes(trimmed) || getDefaultImages(path).includes(trimmed)) {
+    return getImages(path)
   }
+
+  setExtras({ ...previous, [path]: [...list, trimmed] })
+
+  if (isSupabaseConfigured) {
+    const { error } = await supabase
+      .from(TABLE)
+      .insert({ section_path: path, url: trimmed })
+    if (error) {
+      setExtras(previous)
+      throw new Error(`Could not save the image: ${error.message}`)
+    }
+  }
+
   return getImages(path)
 }
 
-export function removeAddedImage(path, url) {
-  const extras = readExtras()
-  const list = Array.isArray(extras[path]) ? extras[path] : []
-  extras[path] = list.filter((u) => u !== url)
-  writeExtras(extras)
+export async function removeAddedImage(path, url) {
+  const previous = extrasCache
+  const list = Array.isArray(previous[path]) ? previous[path] : []
+  setExtras({ ...previous, [path]: list.filter((u) => u !== url) })
+
+  if (isSupabaseConfigured) {
+    const { error } = await supabase
+      .from(TABLE)
+      .delete()
+      .eq('section_path', path)
+      .eq('url', url)
+    if (error) {
+      setExtras(previous)
+      throw new Error(`Could not remove the image: ${error.message}`)
+    }
+  }
+
   return getImages(path)
 }
 

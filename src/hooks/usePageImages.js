@@ -1,5 +1,14 @@
-import { useCallback, useState, useSyncExternalStore } from 'react'
-import { addImage, getImages, isUserAdded, removeAddedImage } from '../data/images'
+import { useCallback, useEffect, useState, useSyncExternalStore } from 'react'
+import {
+  addImage,
+  areImagesLoaded,
+  getImages,
+  isUserAdded,
+  loadImages,
+  removeAddedImage,
+} from '../data/images'
+import { uploadMedia } from '../lib/uploadMedia'
+import { isValidUrl } from '../lib/url'
 
 function subscribe(callback) {
   window.addEventListener('storage', callback)
@@ -11,68 +20,99 @@ function subscribe(callback) {
 }
 
 function getSnapshot(path) {
-  return JSON.stringify(getImages(path))
+  return JSON.stringify({ loaded: areImagesLoaded(), images: getImages(path) })
 }
 
-function notify() {
-  window.dispatchEvent(new Event('dhi-images-change'))
-}
-
-/** Live list of Cloudinary/CDN images for a page section path (e.g. "stories", "home.hero"). */
+/** Live list of images for a page section path (e.g. "stories", "home.hero"). */
 export function usePageImages(path) {
   const serialized = useSyncExternalStore(
     subscribe,
     () => getSnapshot(path),
-    () => JSON.stringify(getImages(path)),
+    () => getSnapshot(path),
   )
-  const images = JSON.parse(serialized)
+  const { loaded, images } = JSON.parse(serialized)
 
-  const add = useCallback(
-    (url) => {
-      addImage(path, url)
-      notify()
+  useEffect(() => {
+    loadImages()
+  }, [])
+
+  const add = useCallback((url) => addImage(path, url), [path])
+
+  // Remove is wired to bare onClick handlers, so it reports failure by
+  // resolving false instead of rejecting. The store restores the image itself.
+  const remove = useCallback(
+    async (url) => {
+      try {
+        await removeAddedImage(path, url)
+        return true
+      } catch (err) {
+        console.error(err)
+        return false
+      }
     },
     [path],
   )
 
-  const remove = useCallback(
-    (url) => {
-      removeAddedImage(path, url)
-      notify()
+  const addFile = useCallback(
+    async (file) => {
+      const url = await uploadMedia(file, path)
+      await addImage(path, url)
+      return url
     },
     [path],
   )
 
   const isAdded = useCallback((url) => isUserAdded(path, url), [path])
 
-  return { images, add, remove, isAdded }
+  return { images, loaded, add, remove, addFile, isAdded }
 }
 
 export function useAddImageForm(path) {
-  const { add } = usePageImages(path)
+  const { add, addFile } = usePageImages(path)
   const [open, setOpen] = useState(false)
   const [url, setUrl] = useState('')
   const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e?.preventDefault()
     const trimmed = url.trim()
     if (!trimmed) {
-      setError('Paste a Cloudinary or image URL.')
+      setError('Paste an image URL, or choose a file to upload.')
       return
     }
-    try {
-      // eslint-disable-next-line no-new
-      new URL(trimmed)
-    } catch {
+    if (!isValidUrl(trimmed)) {
       setError('Enter a valid URL.')
       return
     }
-    add(trimmed)
-    setUrl('')
+
+    setBusy(true)
     setError('')
-    setOpen(false)
+    try {
+      await add(trimmed)
+      setUrl('')
+      setOpen(false)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setBusy(false)
+    }
   }
 
-  return { open, setOpen, url, setUrl, error, submit }
+  const pickFile = async (file) => {
+    if (!file) return
+    setBusy(true)
+    setError('')
+    try {
+      await addFile(file)
+      setUrl('')
+      setOpen(false)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return { open, setOpen, url, setUrl, error, busy, submit, pickFile }
 }

@@ -45,12 +45,13 @@ const weddingDefaults = {
   ],
 }
 
-/** Empty until real photographs are available — the UI shows a "coming soon" panel. */
+/** Paste Cloudinary URLs of real baby & family events here. */
 const babyDefaults = {
   'baby-shower-godh-bharai': [],
   'naming-ceremony-naamkaran': [],
 }
 
+/** Paste Cloudinary URLs of real religious events here. */
 const religiousDefaults = {
   'satyanarayan-katha': [],
   'bhagwat-katha': [],
@@ -205,6 +206,11 @@ export function removeAddedImage(path, url) {
   extras[path] = list.filter((u) => u !== url)
   writeExtras(extras)
   return getImages(path)
+}
+
+/** Everything added on this browser, keyed by section path — used to export into source. */
+export function getAddedImages() {
+  return readExtras()
 }
 
 export function isUserAdded(path, url) {

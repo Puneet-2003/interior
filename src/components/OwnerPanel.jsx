@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useOwnerMode } from '../hooks/useOwnerMode'
 import { usePageImages } from '../hooks/usePageImages'
 import { useTestimonials } from '../hooks/useTestimonials'
-import { imageSectionOptions } from '../data/imageSections'
+import { imageSectionGroups, imageSectionOptions } from '../data/imageSections'
+import { buildExportText, countPending } from '../data/ownerExport'
 
 function AddImagePanel({ onDone }) {
   const [path, setPath] = useState(imageSectionOptions[0].path)
@@ -40,10 +41,14 @@ function AddImagePanel({ onDone }) {
           onChange={(e) => setPath(e.target.value)}
           className="mt-1.5 w-full border border-cream-deep bg-cream px-3 py-2.5 text-sm font-normal normal-case tracking-normal text-ink outline-none focus:border-rose-dust"
         >
-          {imageSectionOptions.map((opt) => (
-            <option key={opt.path} value={opt.path}>
-              {opt.label}
-            </option>
+          {imageSectionGroups.map((group) => (
+            <optgroup key={group.label} label={group.label}>
+              {group.options.map((opt) => (
+                <option key={opt.path} value={opt.path}>
+                  {opt.label}
+                </option>
+              ))}
+            </optgroup>
           ))}
         </select>
       </label>
@@ -154,6 +159,57 @@ function AddTestimonialPanel({ onDone }) {
   )
 }
 
+function PublishPanel() {
+  const text = buildExportText()
+  const pending = countPending()
+  const [copied, setCopied] = useState(false)
+  const areaRef = useRef(null)
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 1800)
+    } catch {
+      areaRef.current?.select()
+    }
+  }
+
+  if (!text) {
+    return (
+      <p className="text-xs leading-relaxed text-ink-muted">
+        Nothing to publish yet. Images and testimonials you add here are saved in this browser
+        only — come back to copy them as code once you have added some.
+      </p>
+    )
+  }
+
+  return (
+    <div className="space-y-3">
+      <p className="text-xs leading-relaxed text-ink-muted">
+        {pending.images} image{pending.images === 1 ? '' : 's'} and {pending.testimonials}{' '}
+        testimonial{pending.testimonials === 1 ? '' : 's'} are saved in this browser only. Paste
+        this into the data files and deploy to show them to visitors.
+      </p>
+      <textarea
+        ref={areaRef}
+        readOnly
+        value={text}
+        rows={8}
+        onFocus={(e) => e.target.select()}
+        className="w-full resize-y border border-cream-deep bg-cream px-3 py-2.5 font-mono text-[0.7rem] leading-relaxed text-ink outline-none focus:border-rose-dust"
+      />
+      <button
+        type="button"
+        onClick={copy}
+        className="w-full bg-rose-dust px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-rose-deep"
+      >
+        {copied ? 'Copied' : 'Copy code'}
+      </button>
+    </div>
+  )
+}
+
 export function OwnerPanel() {
   const { unlocked, lock } = useOwnerMode()
   const [tab, setTab] = useState('image')
@@ -193,7 +249,8 @@ export function OwnerPanel() {
           <div className="flex border-b border-cream-deep">
             {[
               { id: 'image', label: 'Add image' },
-              { id: 'testimonial', label: 'Add testimonial' },
+              { id: 'testimonial', label: 'Testimonial' },
+              { id: 'publish', label: 'Publish' },
             ].map((t) => (
               <button
                 key={t.id}
@@ -209,11 +266,9 @@ export function OwnerPanel() {
           </div>
 
           <div className="p-4">
-            {tab === 'image' ? (
-              <AddImagePanel onDone={onDone} />
-            ) : (
-              <AddTestimonialPanel onDone={onDone} />
-            )}
+            {tab === 'image' && <AddImagePanel onDone={onDone} />}
+            {tab === 'testimonial' && <AddTestimonialPanel onDone={onDone} />}
+            {tab === 'publish' && <PublishPanel key="publish" />}
             {savedFlash && (
               <p className="mt-3 text-center text-xs text-rose-dust">Saved.</p>
             )}

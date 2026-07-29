@@ -1,15 +1,32 @@
-import { pageImages } from '../data/images'
+import { functionCategories } from './functions'
 
-/** Flat list of section paths owners can attach Cloudinary images to. */
-export const imageSectionOptions = [
-  { path: 'home.hero', label: 'Hero' },
-  { path: 'home.about', label: 'About' },
-  { path: 'functions.wedding', label: 'Functions — Wedding' },
-  { path: 'functions.baby', label: 'Functions — Baby & Family' },
-  { path: 'functions.religious', label: 'Functions — Religious' },
-  { path: 'stories', label: 'Stories gallery' },
-  { path: 'testimonials', label: 'Testimonials photo' },
+/** Section paths owners can attach Cloudinary images to, grouped for the picker. */
+export const imageSectionGroups = [
+  {
+    label: 'Home',
+    options: [
+      { path: 'home.hero', label: 'Hero' },
+      { path: 'home.about', label: 'About' },
+    ],
+  },
+  ...functionCategories.map((cat) => ({
+    label: cat.label,
+    options: [
+      { path: `functions.${cat.id}`, label: `${cat.label} — overview` },
+      ...cat.items.map((item) => ({
+        path: `functions.${cat.id}.${item.id}`,
+        label: item.label,
+      })),
+    ],
+  })),
+  {
+    label: 'Other sections',
+    options: [
+      { path: 'stories', label: 'Stories gallery' },
+      { path: 'testimonials', label: 'Testimonials photo' },
+    ],
+  },
 ]
 
-// Keep pageImages imported so tree-shaking doesn't drop the data module reference
-void pageImages
+/** Flat list of every selectable path. */
+export const imageSectionOptions = imageSectionGroups.flatMap((g) => g.options)

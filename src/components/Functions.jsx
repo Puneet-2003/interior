@@ -139,14 +139,22 @@ export function Functions() {
                   <div className="border border-dashed border-cream-deep bg-white/50 px-6 py-16 text-center">
                     <p className="font-serif text-xl text-ink md:text-2xl">
                       {selectedItem
-                        ? `No images yet for ${selectedItem.label}`
-                        : 'No gallery images yet'}
+                        ? `${selectedItem.label} gallery coming soon`
+                        : `${category.label} gallery coming soon`}
                     </p>
                     <p className="mt-2 text-base text-ink-muted">
                       {unlocked
                         ? 'Use Add image and paste a Cloudinary URL for this subcategory.'
-                        : 'Gallery photos for this function will appear here soon.'}
+                        : 'We are curating photographs from these celebrations.'}
                     </p>
+                    {!unlocked && (
+                      <a
+                        href="#contact"
+                        className="mt-5 inline-block text-sm font-semibold uppercase tracking-[0.14em] text-rose-deep transition hover:text-ink"
+                      >
+                        Ask to see this portfolio →
+                      </a>
+                    )}
                   </div>
                 )}
               </motion.div>

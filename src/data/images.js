@@ -45,30 +45,17 @@ const weddingDefaults = {
   ],
 }
 
+// Awaiting real baby & family photos — do not fill with wedding images.
 const babyDefaults = {
-  'baby-shower-godh-bharai': [
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_1_v8uenc.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321038/download_1_c1jc3u.jpg',
-  ],
-  'naming-ceremony-naamkaran': [
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_vadwhi.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320822/Celebrations25_Festive25_WeddingWire2026_n3bd94.jpg',
-  ],
+  'baby-shower-godh-bharai': [],
+  'naming-ceremony-naamkaran': [],
 }
 
+// Awaiting real religious event photos — do not fill with wedding images.
 const religiousDefaults = {
-  'satyanarayan-katha': [
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_2_a80bce.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321038/Indian_Wedding_Phere_rwge20.jpg',
-  ],
-  'bhagwat-katha': [
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/See_The_Most_Stunning_Indian-American_Wedding_hxecdb.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/marriage_talambralu_swh01f.jpg',
-  ],
-  'sundarkand-path': [
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321040/Flower_themed_Haldi___Haldi_Ideas___Haldi_Inspo___yh7xnc.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/Wedding_Photography_feuc26.jpg',
-  ],
+  'satyanarayan-katha': [],
+  'bhagwat-katha': [],
+  'sundarkand-path': [],
 }
 
 /** Default Cloudinary-ready image arrays keyed by page/section id */

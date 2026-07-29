@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
+import { company } from '../data/company'
 
 const nav = [
   { label: 'Home', href: '#home' },
-  { label: 'Projects', href: '#gallery' },
-  { label: 'Assets', href: '#about' },
-  { label: 'Our Clients', href: '#about' },
+  { label: 'About', href: '#about' },
+  { label: 'Functions', href: '#functions' },
+  { label: 'Stories', href: '#stories' },
+  { label: 'Testimonials', href: '#testimonials' },
   { label: 'Contact', href: '#contact' },
-  { label: 'Blog', href: '#how' },
 ]
 
 export function Header() {
@@ -19,95 +20,116 @@ export function Header() {
     setScrolled(y > 40)
   })
 
+  const onHero = !scrolled && !open
+
   return (
     <motion.header
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? 'bg-zinc-950/90 backdrop-blur-md shadow-lg shadow-black/20' : 'bg-transparent'
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled || open
+          ? 'bg-cream/95 shadow-[0_8px_30px_rgba(60,40,30,0.08)] backdrop-blur-md'
+          : 'bg-gradient-to-b from-ink/55 via-ink/25 to-transparent'
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 md:px-8">
-        <a
-          href="#home"
-          className="font-serif text-2xl font-semibold tracking-tight text-white md:text-3xl"
-        >
-          Deepak Gupta Design
+      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-x-6 px-5 py-4 md:px-8 lg:grid-cols-[auto_1fr_auto]">
+        <a href="#home" className="shrink-0 leading-tight">
+          <span
+            className={`font-script text-4xl transition-colors md:text-5xl ${
+              onHero ? 'text-cream' : 'text-rose-dust'
+            }`}
+          >
+            {company.wordmark}
+          </span>
+          <span
+            className={`mt-0.5 block font-serif text-xs font-medium uppercase tracking-[0.35em] transition-colors md:text-sm ${
+              onHero ? 'text-cream/80' : 'text-ink'
+            }`}
+          >
+            {company.wordmarkSuffix}
+          </span>
         </a>
 
-        <nav className="hidden items-center gap-8 text-sm font-medium text-zinc-300 lg:flex">
+        <nav
+          className={`hidden items-center justify-center gap-7 text-sm font-medium uppercase tracking-[0.18em] transition-colors lg:flex ${
+            onHero ? 'text-cream/90' : 'text-ink-muted'
+          }`}
+        >
           {nav.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="transition-colors hover:text-[#26a69a]"
+              className={`transition-colors ${
+                onHero ? 'hover:text-white' : 'hover:text-rose-dust'
+              }`}
             >
               {item.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-5 md:flex">
-          <a
-            href="#contact"
-            className="text-sm font-medium text-zinc-300 transition-colors hover:text-white"
-          >
-            Sign Up
-          </a>
+        <div className="flex items-center justify-end gap-3">
           <motion.a
             href="#contact"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="rounded-full bg-[#26a69a] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-[#26a69a]/25 transition-shadow hover:shadow-[#26a69a]/40"
+            className="hidden bg-rose-dust px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-rose-deep md:inline-flex"
           >
-            Login
+            Inquire
           </motion.a>
-        </div>
 
-        <button
-          type="button"
-          aria-label="Menu"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg border border-zinc-700/80 lg:hidden"
-          onClick={() => setOpen((o) => !o)}
-        >
-          <span
-            className={`block h-0.5 w-5 bg-white transition-transform ${open ? 'translate-y-2 rotate-45' : ''}`}
-          />
-          <span className={`block h-0.5 w-5 bg-white ${open ? 'opacity-0' : ''}`} />
-          <span
-            className={`block h-0.5 w-5 bg-white transition-transform ${open ? '-translate-y-2 -rotate-45' : ''}`}
-          />
-        </button>
+          <button
+            type="button"
+            aria-label="Menu"
+            aria-expanded={open}
+            className={`flex h-10 w-10 flex-col items-center justify-center gap-1.5 border transition-colors lg:hidden ${
+              onHero ? 'border-cream/40' : 'border-cream-deep'
+            }`}
+            onClick={() => setOpen((o) => !o)}
+          >
+            <span
+              className={`block h-0.5 w-5 transition-transform ${
+                onHero ? 'bg-cream' : 'bg-ink'
+              } ${open ? 'translate-y-2 rotate-45' : ''}`}
+            />
+            <span
+              className={`block h-0.5 w-5 ${onHero ? 'bg-cream' : 'bg-ink'} ${
+                open ? 'opacity-0' : ''
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-5 transition-transform ${
+                onHero ? 'bg-cream' : 'bg-ink'
+              } ${open ? '-translate-y-2 -rotate-45' : ''}`}
+            />
+          </button>
+        </div>
       </div>
 
       {open && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0 }}
-          className="border-t border-zinc-800 bg-zinc-950/98 px-5 py-4 lg:hidden"
+          className="border-t border-cream-deep bg-cream px-5 py-4 lg:hidden"
         >
-          <nav className="flex flex-col gap-3 text-sm font-medium text-zinc-200">
+          <nav className="flex flex-col gap-3 text-base font-medium uppercase tracking-[0.14em] text-ink">
             {nav.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="py-1 hover:text-[#26a69a]"
+                className="py-1 hover:text-rose-dust"
               >
                 {item.label}
               </a>
             ))}
-            <a href="#contact" className="pt-2 text-[#26a69a]" onClick={() => setOpen(false)}>
-              Sign Up
-            </a>
             <a
               href="#contact"
-              className="rounded-full bg-[#26a69a] px-4 py-2 text-center text-white"
+              className="mt-2 bg-rose-dust px-4 py-2.5 text-center text-white"
               onClick={() => setOpen(false)}
             >
-              Login
+              Inquire
             </a>
           </nav>
         </motion.div>

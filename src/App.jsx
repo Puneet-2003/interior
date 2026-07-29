@@ -1,5 +1,12 @@
 import { LandingPage } from './LandingPage'
+import { OwnerModeProvider } from './hooks/useOwnerMode'
+import { OwnerPanel } from './components/OwnerPanel'
 
 export default function App() {
-  return <LandingPage />
+  return (
+    <OwnerModeProvider>
+      <LandingPage />
+      <OwnerPanel />
+    </OwnerModeProvider>
+  )
 }

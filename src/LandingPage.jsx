@@ -1,19 +1,23 @@
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { About } from './components/About'
-import { HowItWorks } from './components/HowItWorks'
-import { Gallery } from './components/Gallery'
+import { Functions } from './components/Functions'
+import { Stories } from './components/Stories'
+import { Testimonials } from './components/Testimonials'
+import { Inquiry } from './components/Inquiry'
 import { ContactFooter } from './components/ContactFooter'
 
 export function LandingPage() {
   return (
-    <div className="min-h-svh bg-[#0a0a0a] font-sans text-zinc-100 antialiased">
+    <div className="min-h-svh bg-cream font-sans text-ink antialiased">
       <Header />
       <main>
         <Hero />
         <About />
-        <HowItWorks />
-        <Gallery />
+        <Functions />
+        <Stories />
+        <Testimonials />
+        <Inquiry />
       </main>
       <ContactFooter />
     </div>

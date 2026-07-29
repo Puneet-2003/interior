@@ -45,13 +45,12 @@ const weddingDefaults = {
   ],
 }
 
-// Awaiting real baby & family photos — do not fill with wedding images.
+/** Empty until real photographs are available — the UI shows a "coming soon" panel. */
 const babyDefaults = {
   'baby-shower-godh-bharai': [],
   'naming-ceremony-naamkaran': [],
 }
 
-// Awaiting real religious event photos — do not fill with wedding images.
 const religiousDefaults = {
   'satyanarayan-katha': [],
   'bhagwat-katha': [],

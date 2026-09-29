@@ -45,7 +45,7 @@ export function Stories() {
                 <button
                   type="button"
                   onClick={() => remove(src)}
-                  className="absolute right-2 top-2 bg-ink/70 px-2 py-1 text-[0.6rem] uppercase tracking-wider text-white opacity-0 transition group-hover:opacity-100"
+                  className="absolute right-2 top-2 bg-cream/70 px-2 py-1 text-[0.6rem] uppercase tracking-wider text-ink opacity-0 transition group-hover:opacity-100"
                 >
                   Remove
                 </button>

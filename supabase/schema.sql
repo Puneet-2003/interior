@@ -83,3 +83,26 @@ drop policy if exists site_media_public_delete on storage.objects;
 create policy site_media_public_delete
   on storage.objects for delete to anon, authenticated
   using (bucket_id = 'site-media');
+
+-- ---------------------------------------------------------------------------
+-- Enquiries submitted from the contact form. Insert-only for the anon key:
+-- rows hold personal details, so reads stay limited to the Supabase dashboard.
+-- ---------------------------------------------------------------------------
+create table if not exists public.inquiries (
+  id uuid primary key default gen_random_uuid(),
+  name text not null,
+  phone text not null,
+  guests text not null default '',
+  occasion text not null default '',
+  preference text not null default '',
+  created_at timestamptz not null default now()
+);
+
+create index if not exists inquiries_created_at_idx
+  on public.inquiries (created_at desc);
+
+alter table public.inquiries enable row level security;
+
+drop policy if exists inquiries_public_insert on public.inquiries;
+create policy inquiries_public_insert
+  on public.inquiries for insert to anon, authenticated with check (true);

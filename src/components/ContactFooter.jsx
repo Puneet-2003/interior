@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { fadeUp } from '../lib/motion'
 import { SecretOwnerTrigger } from './OwnerPanel'
-import { company, companyEmailHref, companyPhoneHref } from '../data/company'
+import { company, companyPhoneHref } from '../data/company'
 
 const links = [
   { label: 'Home', href: '#home' },
@@ -45,19 +45,13 @@ export function ContactFooter() {
             >
               {company.phone}
             </a>
-            <a
-              href={companyEmailHref}
-              className="font-medium text-rose-dust transition hover:text-rose-deep"
-            >
-              {company.email}
-            </a>
           </address>
 
           <motion.a
             href="#home"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="mt-8 inline-flex border border-rose-dust/40 px-5 py-2.5 text-sm font-medium uppercase tracking-[0.14em] text-ink hover:border-rose-dust hover:bg-rose-dust hover:text-white"
+            className="mt-8 inline-flex border border-rose-dust/40 px-5 py-2.5 text-sm font-medium uppercase tracking-[0.14em] text-ink hover:border-rose-dust hover:bg-rose-dust hover:text-cream"
           >
             Back to top
           </motion.a>

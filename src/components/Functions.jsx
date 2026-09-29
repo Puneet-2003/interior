@@ -41,7 +41,7 @@ export function Functions() {
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
         style={{
           backgroundImage:
-            'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(155,27,48,0.16), transparent 55%)',
+            'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212,175,55,0.14), transparent 55%)',
         }}
         aria-hidden
       />
@@ -49,8 +49,8 @@ export function Functions() {
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
         <motion.div {...fadeUp} className="text-center">
           <p className="font-script text-3xl text-rose-dust md:text-4xl">What we host</p>
-          <div className="velvet-panel mx-auto mt-5 inline-block px-10 py-4 shadow-[0_14px_40px_rgba(109,15,33,0.28)]">
-            <h2 className="font-serif text-3xl font-medium text-white md:text-4xl">Our Best Services</h2>
+          <div className="velvet-panel mx-auto mt-5 inline-block px-10 py-4 shadow-[0_14px_40px_rgba(0,0,0,0.5)]">
+            <h2 className="font-serif text-3xl font-medium text-cream md:text-4xl">Our Best Services</h2>
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink-muted md:text-lg">
             One place for every celebration — wedding rituals, baby & family milestones, and sacred
@@ -66,8 +66,8 @@ export function Functions() {
               onClick={() => selectCategory(cat.id)}
               className={`px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em] transition ${
                 active === cat.id
-                  ? 'bg-ink text-cream'
-                  : 'bg-white text-ink-muted hover:text-ink'
+                  ? 'bg-rose-dust text-cream'
+                  : 'bg-cream text-ink-muted hover:text-ink'
               }`}
             >
               {cat.label}
@@ -136,7 +136,7 @@ export function Functions() {
                     onRemove={remove}
                   />
                 ) : (
-                  <div className="border border-dashed border-cream-deep bg-white/50 px-6 py-16 text-center">
+                  <div className="border border-dashed border-cream-deep bg-cream/40 px-6 py-16 text-center">
                     <p className="font-serif text-xl text-ink md:text-2xl">
                       {selectedItem
                         ? `${selectedItem.label} gallery coming soon`
@@ -180,15 +180,15 @@ export function Functions() {
                       aria-pressed={isSelected}
                       className={`w-full rounded-md px-4 py-4 text-left text-base transition ${
                         isSelected
-                          ? 'bg-rose-dust text-white shadow-sm'
-                          : 'bg-white text-ink shadow-sm hover:bg-white hover:text-rose-deep'
+                          ? 'bg-rose-dust text-cream shadow-sm'
+                          : 'bg-cream text-ink shadow-sm hover:bg-cream hover:text-rose-dust'
                       }`}
                     >
                       <span className="block">{item.label}</span>
                       {unlocked && (
                         <span
                           className={`mt-1 block text-xs uppercase tracking-[0.12em] ${
-                            isSelected ? 'text-white/75' : 'text-ink-muted'
+                            isSelected ? 'text-cream/75' : 'text-ink-muted'
                           }`}
                         >
                           {category.id}.{item.id}
@@ -205,10 +205,10 @@ export function Functions() {
               >
                 <a
                   href="#contact"
-                  className="flex w-full flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-md bg-ink px-4 py-4 text-center text-base text-cream shadow-sm transition hover:bg-rose-deep"
+                  className="flex w-full flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-md bg-rose-dust px-4 py-4 text-center text-base text-cream shadow-sm transition hover:bg-rose-deep"
                 >
                   <span>We manage all types of events</span>
-                  <span className="text-sm font-semibold uppercase tracking-[0.14em] text-blush">
+                  <span className="text-sm font-semibold uppercase tracking-[0.14em] text-cream/80">
                     Contact us →
                   </span>
                 </a>

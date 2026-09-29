@@ -27,7 +27,7 @@ export function Hero() {
   const overlayY = useTransform(scrollYProgress, [0, 1], ['0%', '12%'])
 
   return (
-    <section id="home" ref={ref} className="relative min-h-[100svh] overflow-hidden bg-ink">
+    <section id="home" ref={ref} className="relative min-h-[100svh] overflow-hidden bg-cream">
       <motion.div style={{ scale: scaleBg, y: yBg }} className="absolute inset-0">
         {heroVideo ? (
           <AnimatePresence initial={false}>
@@ -56,7 +56,7 @@ export function Hero() {
             />
           )
         )}
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/30 via-ink/20 to-ink/55" />
+        <div className="absolute inset-0 bg-gradient-to-b from-cream/30 via-cream/20 to-cream/70" />
       </motion.div>
 
       {heroVideos.length > 1 && (
@@ -65,7 +65,7 @@ export function Hero() {
             type="button"
             onClick={showPreviousVideo}
             aria-label="Previous hero video"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/45 bg-black/20 text-white backdrop-blur-sm transition hover:bg-white/20"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-rose-dust/50 bg-black/30 text-rose-dust backdrop-blur-sm transition hover:bg-rose-dust/20"
           >
             <span aria-hidden="true">‹</span>
           </button>
@@ -79,8 +79,8 @@ export function Hero() {
                 aria-current={index === activeVideo % heroVideos.length ? 'true' : undefined}
                 className={`h-1.5 rounded-full transition-all ${
                   index === activeVideo % heroVideos.length
-                    ? 'w-7 bg-white'
-                    : 'w-1.5 bg-white/50 hover:bg-white/80'
+                    ? 'w-7 bg-rose-dust'
+                    : 'w-1.5 bg-rose-dust/40 hover:bg-rose-dust/80'
                 }`}
               />
             ))}
@@ -89,7 +89,7 @@ export function Hero() {
             type="button"
             onClick={showNextVideo}
             aria-label="Next hero video"
-            className="flex h-9 w-9 items-center justify-center rounded-full border border-white/45 bg-black/20 text-white backdrop-blur-sm transition hover:bg-white/20"
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-rose-dust/50 bg-black/30 text-rose-dust backdrop-blur-sm transition hover:bg-rose-dust/20"
           >
             <span aria-hidden="true">›</span>
           </button>
@@ -108,25 +108,25 @@ export function Hero() {
           transition={{ duration: 0.95, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="w-full max-w-xl bg-transparent px-4 py-6 text-center md:px-6"
         >
-          <div className="mx-auto mb-5 h-px w-14 bg-white/60" />
-          <p className="font-script text-2xl text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] md:text-3xl">
+          <div className="mx-auto mb-5 h-px w-14 bg-rose-dust/70" />
+          <p className="font-script text-2xl text-rose-dust drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] md:text-3xl">
             Celebrations, crafted
           </p>
-          <h1 className="mt-2 font-serif text-4xl font-medium leading-[1.15] text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] md:text-5xl">
+          <h1 className="mt-2 font-serif text-4xl font-medium leading-[1.15] text-ink drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] md:text-5xl">
             Plan Your Dream With Us
           </h1>
-          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-white/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)] md:text-base">
+          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-ink/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)] md:text-base">
             Wedding, family, and sacred gatherings — designed with warmth, ritual, and an editorial eye for every moment.
           </p>
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="mt-7 inline-flex rounded-full bg-rose-dust px-7 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-rose-deep md:text-sm"
+            className="mt-7 inline-flex rounded-full bg-rose-dust px-7 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-cream transition hover:bg-rose-deep md:text-sm"
           >
             Contact Now
           </motion.a>
-          <div className="mx-auto mt-7 h-px w-14 bg-white/60" />
+          <div className="mx-auto mt-7 h-px w-14 bg-rose-dust/70" />
         </motion.div>
       </div>
 
@@ -135,7 +135,7 @@ export function Hero() {
         aria-label="Scroll to about"
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-8 left-1/2 z-10 flex h-11 w-11 -translate-x-1/2 items-center justify-center border border-white/35 text-white"
+        className="absolute bottom-8 left-1/2 z-10 flex h-11 w-11 -translate-x-1/2 items-center justify-center border border-rose-dust/50 text-rose-dust"
       >
         <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />

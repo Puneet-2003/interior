@@ -46,12 +46,12 @@ export function AutoGallery({
           <img
             src={src}
             alt={copyIndex === 0 ? `${label} ${i + 1}` : ''}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition duration-700 hover:scale-105"
             draggable={false}
             loading={copyIndex === 0 && i < 4 ? 'eager' : 'lazy'}
           />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/35 to-transparent p-3 pt-12">
-            <span className="inline-block bg-white px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-ink">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-cream/80 to-transparent p-3 pt-12">
+            <span className="inline-block bg-cream/85 px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-ink">
               {label}
             </span>
           </div>
@@ -59,7 +59,7 @@ export function AutoGallery({
             <button
               type="button"
               onClick={() => onRemove?.(src)}
-              className="absolute right-2 top-2 z-10 bg-ink/70 px-2 py-1 text-[0.6rem] uppercase tracking-wider text-white opacity-0 transition group-hover/gallery:opacity-100 focus:opacity-100"
+              className="absolute right-2 top-2 z-10 bg-cream/70 px-2 py-1 text-[0.6rem] uppercase tracking-wider text-ink opacity-0 transition group-hover/gallery:opacity-100 focus:opacity-100"
             >
               Remove
             </button>

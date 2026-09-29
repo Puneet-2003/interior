@@ -5,13 +5,13 @@
   --font-sans: 'Jost', 'Segoe UI', sans-serif;
   --font-script: 'Great Vibes', cursive;
 
-  --color-cream: #ffffff;
-  --color-cream-deep: #eed8dc;
-  --color-ink: #2a0710;
-  --color-ink-muted: #6f4b52;
-  --color-rose-dust: #9b1b30;
-  --color-rose-deep: #6d0f21;
-  --color-blush: #fdf3f4;
+  --color-cream: #0b0a08;
+  --color-cream-deep: #3d3315;
+  --color-ink: #f0e7d4;
+  --color-ink-muted: #b7ab90;
+  --color-rose-dust: #d4af37;
+  --color-rose-deep: #a8862a;
+  --color-blush: #161209;
 }
 
 html {
@@ -57,6 +57,25 @@ body {
   select:disabled {
     cursor: not-allowed;
   }
+}
+
+/* Slim scrollbar for the custom dropdown option panel */
+.dropdown-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-cream-deep) transparent;
+}
+
+.dropdown-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-cream-deep);
+  border-radius: 999px;
+}
+
+.dropdown-scroll::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* Infinite horizontal gallery strip */

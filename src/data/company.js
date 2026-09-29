@@ -3,18 +3,16 @@
  * Replace these placeholder values with the real business details before launch.
  */
 export const company = {
-  name: 'Elegance Events',
-  wordmark: 'Elegance',
-  wordmarkSuffix: 'Events',
+  name: 'Dream City Event Gwalior',
+  wordmark: 'Dream City',
+  wordmarkSuffix: 'Event Gwalior',
   tagline: 'Events & Celebrations',
-  email: 'hello@example.com',
-  phone: '+91 00000 00000',
+  phone: '+91 88276 88283',
   address: {
-    line1: '123 Celebration Avenue, Suite 4',
-    line2: 'Your City, Your State 000000',
+    line1: '1st Floor, Shop No. 2, Main Road, near Gagan Plaza, above Sky Gold Hair Salon',
+    line2: 'Kalpi Bridge Colony, Mahaveer, Morar, Gwalior, Madhya Pradesh 474005',
   },
 }
 
 export const companyPhoneHref = `tel:${company.phone.replace(/[^\d+]/g, '')}`
-export const companyEmailHref = `mailto:${company.email}`
 export const companyAddressText = `${company.address.line1}, ${company.address.line2}`

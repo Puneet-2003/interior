@@ -51,7 +51,7 @@ export function Testimonials() {
         </motion.div>
 
         {!item ? (
-          <div className="border border-dashed border-cream-deep bg-white/70 px-6 py-12 text-center">
+          <div className="border border-dashed border-cream-deep bg-cream/40 px-6 py-12 text-center">
             <p className="font-serif text-base text-ink-muted">
               {loaded
                 ? 'No testimonials yet. Use Owner tools → Testimonial to add one.'
@@ -92,7 +92,7 @@ export function Testimonials() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              className="relative flex flex-col justify-center bg-white px-6 py-8 md:px-9 md:py-10"
+              className="relative flex flex-col justify-center border border-cream-deep bg-cream px-6 py-8 md:px-9 md:py-10"
             >
               {unlocked && (
                 <button

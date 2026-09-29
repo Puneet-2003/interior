@@ -22,7 +22,7 @@ export function AddImageButton({
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="inline-flex items-center gap-2 border border-rose-dust/40 bg-white/90 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-ink transition hover:border-rose-dust hover:bg-rose-dust hover:text-white"
+        className="inline-flex items-center gap-2 border border-rose-dust/40 bg-cream/90 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-ink transition hover:border-rose-dust hover:bg-rose-dust hover:text-cream"
       >
         <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M12 4v16m8-8H4" />
@@ -33,7 +33,7 @@ export function AddImageButton({
       {open && (
         <form
           onSubmit={submit}
-          className="absolute right-0 top-full z-40 mt-2 w-[min(360px,90vw)] border border-cream-deep bg-white p-4 shadow-[0_12px_40px_rgba(74,10,22,0.14)]"
+          className="absolute right-0 top-full z-40 mt-2 w-[min(360px,90vw)] border border-cream-deep bg-cream p-4 shadow-[0_12px_40px_rgba(0,0,0,0.55)]"
         >
           <p className="font-script text-lg text-rose-dust">Add to this section</p>
           <p className="mt-1 text-xs leading-relaxed text-ink-muted">
@@ -95,12 +95,12 @@ export function AddImageButton({
             className="mt-3 w-full border border-cream-deep bg-cream px-3 py-2.5 text-sm text-ink outline-none placeholder:text-ink-muted/60 focus:border-rose-dust"
             autoFocus
           />
-          {error && <p className="mt-2 text-xs text-rose-700">{error}</p>}
+          {error && <p className="mt-2 text-xs text-rose-400">{error}</p>}
           <div className="mt-3 flex gap-2">
             <button
               type="submit"
               disabled={busy}
-              className="flex-1 bg-rose-dust px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-rose-deep disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex-1 bg-rose-dust px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-cream transition hover:bg-rose-deep disabled:cursor-not-allowed disabled:opacity-60"
             >
               {busy ? 'Saving…' : 'Save'}
             </button>

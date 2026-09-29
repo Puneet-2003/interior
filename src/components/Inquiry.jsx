@@ -1,13 +1,25 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { fadeUp } from '../lib/motion'
+import { Dropdown } from './Dropdown'
+import { celebrationGroups, CUSTOM_EVENT } from '../data/celebrations'
+import { company } from '../data/company'
+import { supabase } from '../lib/supabaseClient'
+
+const CUSTOM_GUESTS = 'Custom'
+
+// wa.me requires digits only, with country code and no "+"
+const whatsappNumber = String(import.meta.env.VITE_PHONE_NUMBER ?? '').replace(/[^\d]/g, '')
+
+const guestGroups = [{ options: ['20', '50', '100', '150+', CUSTOM_GUESTS] }]
 
 const initial = {
   name: '',
-  email: '',
   phone: '',
   guests: '',
+  guestsCustom: '',
   occasion: '',
+  occasionCustom: '',
   preference: '',
 }
 
@@ -21,6 +33,40 @@ export function Inquiry() {
 
   const onSubmit = (e) => {
     e.preventDefault()
+
+    const enquiry = {
+      name: form.name.trim(),
+      phone: form.phone.trim(),
+      guests: form.guests === CUSTOM_GUESTS ? form.guestsCustom.trim() : form.guests,
+      occasion: form.occasion === CUSTOM_EVENT ? form.occasionCustom.trim() : form.occasion,
+      preference: form.preference.trim(),
+    }
+
+    if (supabase) {
+      supabase.from('inquiries').insert(enquiry).then(({ error }) => {
+        if (error) console.error('Failed to save enquiry:', error.message)
+      })
+    } else {
+      console.warn('Supabase is not configured — enquiry was not saved to the database.')
+    }
+
+    // Opened synchronously inside the submit gesture, otherwise popup blockers reject it.
+    if (whatsappNumber) {
+      const message = [
+        `New enquiry — ${company.name}`,
+        `Name: ${enquiry.name}`,
+        `Phone: ${enquiry.phone || '—'}`,
+        `Guests: ${enquiry.guests || '—'}`,
+        `Celebration: ${enquiry.occasion || '—'}`,
+        `Venue city: ${enquiry.preference || '—'}`,
+      ].join('\n')
+      window.open(
+        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+        '_blank',
+        'noopener',
+      )
+    }
+
     setSent(true)
   }
 
@@ -37,7 +83,7 @@ export function Inquiry() {
       <div className="relative mx-auto max-w-3xl px-5 md:px-8">
         <motion.div
           {...fadeUp}
-          className="border border-cream-deep bg-white px-6 py-12 shadow-[0_20px_60px_rgba(74,10,22,0.10)] md:px-14 md:py-16"
+          className="border border-cream-deep bg-blush px-6 py-12 shadow-[0_20px_60px_rgba(0,0,0,0.5)] md:px-14 md:py-16"
           style={{ borderRadius: '50% / 8%' }}
         >
           <div className="text-center">
@@ -62,15 +108,6 @@ export function Inquiry() {
                 className={field}
               />
               <input
-                name="email"
-                type="email"
-                value={form.email}
-                onChange={onChange}
-                required
-                placeholder="Your Email"
-                className={field}
-              />
-              <input
                 name="phone"
                 type="tel"
                 value={form.phone}
@@ -78,20 +115,40 @@ export function Inquiry() {
                 placeholder="Phone Number"
                 className={field}
               />
-              <input
-                name="guests"
-                value={form.guests}
-                onChange={onChange}
+              <Dropdown
                 placeholder="Number of Guests"
-                className={field}
+                value={form.guests}
+                onChange={(guests) => setForm((f) => ({ ...f, guests }))}
+                groups={guestGroups}
               />
-              <input
-                name="occasion"
-                value={form.occasion}
-                onChange={onChange}
+              {form.guests === CUSTOM_GUESTS && (
+                <input
+                  name="guestsCustom"
+                  type="number"
+                  min="1"
+                  value={form.guestsCustom}
+                  onChange={onChange}
+                  required
+                  placeholder="Enter number of guests"
+                  className={field}
+                />
+              )}
+              <Dropdown
                 placeholder="What will be the celebration?"
-                className={field}
+                value={form.occasion}
+                onChange={(occasion) => setForm((f) => ({ ...f, occasion }))}
+                groups={celebrationGroups}
               />
+              {form.occasion === CUSTOM_EVENT && (
+                <input
+                  name="occasionCustom"
+                  value={form.occasionCustom}
+                  onChange={onChange}
+                  required
+                  placeholder="Enter your event / celebration"
+                  className={field}
+                />
+              )}
               <input
                 name="preference"
                 value={form.preference}
@@ -104,7 +161,7 @@ export function Inquiry() {
                   type="submit"
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="bg-rose-dust px-10 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-rose-deep"
+                  className="bg-rose-dust px-10 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-cream transition hover:bg-rose-deep"
                 >
                   Send
                 </motion.button>

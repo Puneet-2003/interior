@@ -16,7 +16,7 @@ const LABEL =
   'block text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-ink-muted'
 
 const BUTTON =
-  'w-full bg-rose-dust px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-white transition hover:bg-rose-deep disabled:cursor-not-allowed disabled:opacity-60'
+  'w-full bg-rose-dust px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-cream transition hover:bg-rose-deep disabled:cursor-not-allowed disabled:opacity-60'
 
 function FilePicker({ label, busy, onPick, accept = 'image/*,video/*' }) {
   const inputRef = useRef(null)
@@ -122,7 +122,7 @@ function AddImagePanel({ onDone }) {
           className={FIELD}
         />
       </label>
-      {error && <p className="text-xs text-rose-700">{error}</p>}
+      {error && <p className="text-xs text-rose-400">{error}</p>}
       <button type="submit" disabled={busy} className={BUTTON}>
         {busy ? 'Saving…' : 'Save image'}
       </button>
@@ -228,7 +228,7 @@ function AddTestimonialPanel({ onDone }) {
           className={FIELD}
         />
       </label>
-      {error && <p className="text-xs text-rose-700">{error}</p>}
+      {error && <p className="text-xs text-rose-400">{error}</p>}
       <button type="submit" disabled={busy || uploading} className={BUTTON}>
         {busy ? 'Saving…' : 'Save testimonial'}
       </button>
@@ -301,7 +301,7 @@ export function OwnerPanel() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 16, scale: 0.96 }}
           transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed bottom-5 right-5 z-[60] w-[min(360px,calc(100vw-2rem))] border border-cream-deep bg-white shadow-[0_20px_60px_rgba(74,10,22,0.20)]"
+          className="fixed bottom-5 right-5 z-[60] w-[min(360px,calc(100vw-2rem))] border border-cream-deep bg-cream shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
         >
           <div className="flex items-center justify-between border-b border-cream-deep px-4 py-3">
             <div>
@@ -311,7 +311,7 @@ export function OwnerPanel() {
               </p>
               <p
                 className={`mt-1 flex items-center gap-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.1em] ${
-                  isSupabaseConfigured ? 'text-emerald-700' : 'text-rose-700'
+                  isSupabaseConfigured ? 'text-emerald-400' : 'text-rose-400'
                 }`}
               >
                 <span

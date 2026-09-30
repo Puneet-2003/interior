@@ -5,10 +5,8 @@ import { AddImageButton } from './AddImageButton'
 import { CountUp } from './CountUp'
 
 const stats = [
-  { value: '200+', label: 'Celebrations' },
-  { value: '45', label: 'Cities served' },
-  { value: '12', label: 'Years of craft' },
-  { value: '100%', label: 'Heartfelt care' },
+  { value: '500+', label: 'Weddings Curated' },
+  { value: '10+', label: 'Years of Craft' },
 ]
 
 const whyServices = [
@@ -40,33 +38,42 @@ export function About() {
 
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <motion.div {...fadeUp}>
-            <p className="font-script text-3xl text-rose-dust md:text-4xl">About us</p>
+            <p className="font-script text-3xl text-rose-dust md:text-4xl">Our Story</p>
             <h2 className="mt-2 font-serif text-4xl font-medium text-ink md:text-5xl lg:leading-tight">
-              Spaces and ceremonies that feel luminous and unmistakably yours
+              A Legacy of Love, Crafted in Gwalior
             </h2>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
-              From first conversation to final farewell, we orchestrate weddings, baby celebrations,
-              and religious gatherings with calm structure and beautiful detail — so you can be
-              present for every blessing.
+              Dream City Events began with a simple belief — every wedding deserves to feel like a
+              royal chapter. For over a decade, we have orchestrated celebrations inside Gwalior's
+              heritage palaces, luxury banquets and intimate family homes with the same reverence.
+            </p>
+            <p className="mt-4 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
+              We are not just planners. We are custodians of your story — curating light, scent,
+              sound and silence so that when you walk in, the world holds its breath.
             </p>
 
-            <motion.div
-              variants={staggerParent}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-40px' }}
-              className="mt-10 grid grid-cols-2 gap-8 sm:gap-10"
-            >
+            <div className="mt-10 flex gap-12 sm:gap-16">
               {stats.map((s) => (
-                <motion.div key={s.value} variants={staggerChild}>
-                  <CountUp
-                    value={s.value}
-                    className="font-serif text-4xl text-ink md:text-5xl"
-                  />
+                <div key={s.label}>
+                  <CountUp value={s.value} className="font-serif text-4xl text-ink md:text-5xl" />
                   <p className="mt-1 text-base text-ink-muted">{s.label}</p>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
+
+            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.22em] text-rose-dust">
+              Palace • Heritage • Modern
+            </p>
+            <blockquote className="mt-4 border-l-2 border-rose-dust/60 pl-5">
+              <p className="font-serif text-xl italic leading-relaxed text-ink md:text-2xl">
+                “We design moments that feel timeless, not trendy.”
+              </p>
+              <footer className="mt-2 text-sm text-ink-muted">— Founder, Dream City Events</footer>
+            </blockquote>
+            <p className="mt-6 text-sm text-ink-muted">
+              <span className="font-semibold uppercase tracking-[0.16em] text-ink">Based in</span>{' '}
+              Gwalior, MP • Pan-India
+            </p>
 
             <motion.a
               href="#contact"

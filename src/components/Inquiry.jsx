@@ -13,6 +13,19 @@ const whatsappNumber = String(import.meta.env.VITE_PHONE_NUMBER ?? '').replace(/
 
 const guestGroups = [{ options: ['20', '50', '100', '150+', CUSTOM_GUESTS] }]
 
+const budgetGroups = [
+  {
+    options: [
+      'Under ₹2,00,000',
+      '₹2,00,000 – ₹5,00,000',
+      '₹5,00,000 – ₹10,00,000',
+      '₹10,00,000 – ₹25,00,000',
+      '₹25,00,000+',
+      'Not sure yet',
+    ],
+  },
+]
+
 const initial = {
   name: '',
   phone: '',
@@ -21,6 +34,9 @@ const initial = {
   occasion: '',
   occasionCustom: '',
   preference: '',
+  eventDate: '',
+  budget: '',
+  message: '',
 }
 
 export function Inquiry() {
@@ -40,6 +56,9 @@ export function Inquiry() {
       guests: form.guests === CUSTOM_GUESTS ? form.guestsCustom.trim() : form.guests,
       occasion: form.occasion === CUSTOM_EVENT ? form.occasionCustom.trim() : form.occasion,
       preference: form.preference.trim(),
+      event_date: form.eventDate,
+      budget: form.budget,
+      message: form.message.trim(),
     }
 
     if (supabase) {
@@ -58,8 +77,13 @@ export function Inquiry() {
         `Phone: ${enquiry.phone || '—'}`,
         `Guests: ${enquiry.guests || '—'}`,
         `Celebration: ${enquiry.occasion || '—'}`,
+        `Event date: ${enquiry.event_date || '—'}`,
         `Venue city: ${enquiry.preference || '—'}`,
-      ].join('\n')
+        `Budget: ${enquiry.budget || '—'}`,
+        enquiry.message ? `Message: ${enquiry.message}` : null,
+      ]
+        .filter(Boolean)
+        .join('\n')
       window.open(
         `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
         '_blank',
@@ -74,7 +98,7 @@ export function Inquiry() {
     'w-full border-0 border-b border-cream-deep bg-transparent px-0 py-3.5 text-base text-ink outline-none placeholder:text-ink-muted/55 focus:border-rose-dust'
 
   return (
-    <section id="inquiry" className="relative overflow-hidden bg-cream py-24 md:py-32">
+    <section id="contact" className="relative overflow-hidden bg-cream py-24 md:py-32">
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--color-blush)_0%,_transparent_70%)]"
         aria-hidden
@@ -156,6 +180,29 @@ export function Inquiry() {
                 placeholder="Local Preference / Venue city"
                 className={field}
               />
+              <input
+                name="eventDate"
+                type="date"
+                value={form.eventDate}
+                onChange={onChange}
+                aria-label="Event date"
+                style={{ colorScheme: 'dark' }}
+                className={field}
+              />
+              <Dropdown
+                placeholder="Budget Range (optional)"
+                value={form.budget}
+                onChange={(budget) => setForm((f) => ({ ...f, budget }))}
+                groups={budgetGroups}
+              />
+              <textarea
+                name="message"
+                value={form.message}
+                onChange={onChange}
+                rows={3}
+                placeholder="Tell us more about your celebration (optional)"
+                className={`${field} resize-none`}
+              />
               <div className="pt-4 text-center">
                 <motion.button
                   type="submit"
@@ -163,7 +210,7 @@ export function Inquiry() {
                   whileTap={{ scale: 0.98 }}
                   className="bg-rose-dust px-10 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-cream transition hover:bg-rose-deep"
                 >
-                  Send
+                  Get My Quote
                 </motion.button>
               </div>
             </form>

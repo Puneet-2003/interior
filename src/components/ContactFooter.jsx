@@ -1,65 +1,126 @@
 import { motion } from 'framer-motion'
 import { fadeUp } from '../lib/motion'
 import { SecretOwnerTrigger } from './OwnerPanel'
-import { company, companyPhoneHref } from '../data/company'
+import { company, companyPhoneHref, companyAddressText, whatsappHref } from '../data/company'
 
-const links = [
+const quickLinks = [
   { label: 'Home', href: '#home' },
-  { label: 'Functions', href: '#functions' },
-  { label: 'Stories', href: '#stories' },
-  { label: 'Testimonials', href: '#testimonials' },
+  { label: 'Services', href: '#services' },
+  { label: 'Packages', href: '#packages' },
+  { label: 'Destinations', href: '#destinations' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
+]
+
+const serviceLinks = [
+  'Wedding Planning',
+  'Destination Weddings',
+  'Decoration',
+  'Corporate Events',
+  'Birthday Events',
+  'Honeymoon Packages',
 ]
 
 export function ContactFooter() {
   return (
-    <footer id="contact" className="border-t border-cream-deep bg-blush py-20 md:py-24">
+    <footer id="footer" className="border-t border-cream-deep bg-blush pb-24 pt-20 lg:pb-24 md:pt-24">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <motion.div {...fadeUp} className="flex flex-col items-center text-center">
-          <p className="font-script text-5xl text-rose-dust">{company.wordmark}</p>
-          <p className="mt-1 font-serif text-sm uppercase tracking-[0.35em] text-ink">
-            {company.wordmarkSuffix}
-          </p>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-ink-muted md:text-lg">
-            Weddings, baby celebrations, and sacred gatherings — planned with warmth and refined
-            detail. Reach out for new events and collaborations.
-          </p>
+        <motion.div
+          {...fadeUp}
+          className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]"
+        >
+          <div>
+            <p className="font-script text-4xl text-rose-dust">{company.wordmark}</p>
+            <p className="mt-1 font-serif text-sm uppercase tracking-[0.35em] text-ink">
+              {company.wordmarkSuffix}
+            </p>
+            <p className="mt-5 max-w-sm text-base leading-relaxed text-ink-muted">
+              Weddings, destination celebrations and every milestone in between — planned, designed
+              and managed end to end, from Gwalior to anywhere your story takes you.
+            </p>
+          </div>
 
-          <nav className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium uppercase tracking-[0.16em] text-ink-muted">
-            {links.map((l) => (
-              <a key={l.label} href={l.href} className="hover:text-rose-dust">
-                {l.label}
-              </a>
-            ))}
+          <nav aria-label="Quick links">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-rose-dust">
+              Quick Links
+            </h3>
+            <ul className="mt-5 space-y-2.5 text-sm text-ink-muted">
+              {quickLinks.map((l) => (
+                <li key={l.label}>
+                  <a href={l.href} className="transition hover:text-rose-dust">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </nav>
 
-          <address className="mt-8 flex flex-col items-center gap-2 not-italic text-base text-ink-muted">
-            <p className="max-w-xs leading-relaxed">
-              {company.address.line1}
-              <br />
-              {company.address.line2}
-            </p>
-            <a
-              href={companyPhoneHref}
-              className="font-medium text-rose-dust transition hover:text-rose-deep"
-            >
-              {company.phone}
-            </a>
-          </address>
+          <nav aria-label="Services">
+            <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-rose-dust">
+              Services
+            </h3>
+            <ul className="mt-5 space-y-2.5 text-sm text-ink-muted">
+              {serviceLinks.map((label) => (
+                <li key={label}>
+                  <a href="#services" className="transition hover:text-rose-dust">
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-rose-dust">
+              Contact
+            </h3>
+            <address className="mt-5 space-y-2.5 text-sm not-italic text-ink-muted">
+              <p>
+                <a href={companyPhoneHref} className="transition hover:text-rose-dust">
+                  {company.phone}
+                </a>
+              </p>
+              <p>
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition hover:text-rose-dust"
+                >
+                  WhatsApp us
+                </a>
+              </p>
+              <p className="max-w-xs leading-relaxed">{companyAddressText}</p>
+              {company.instagram && (
+                <p>
+                  <a
+                    href={company.instagram}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="transition hover:text-rose-dust"
+                  >
+                    Instagram
+                  </a>
+                </p>
+              )}
+            </address>
+          </div>
+        </motion.div>
+
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-cream-deep pt-8 md:flex-row">
+          <p className="text-xs text-ink-muted/70">
+            © <SecretOwnerTrigger /> {company.name}. Crafted for celebrations.
+          </p>
           <motion.a
             href="#home"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="mt-8 inline-flex border border-rose-dust/40 px-5 py-2.5 text-sm font-medium uppercase tracking-[0.14em] text-ink hover:border-rose-dust hover:bg-rose-dust hover:text-cream"
+            className="inline-flex border border-rose-dust/40 px-5 py-2.5 text-sm font-medium uppercase tracking-[0.14em] text-ink hover:border-rose-dust hover:bg-rose-dust hover:text-cream"
           >
             Back to top
           </motion.a>
-        </motion.div>
-
-        <p className="mt-16 text-center text-xs text-ink-muted/70">
-          © <SecretOwnerTrigger /> {company.name}. Crafted for celebrations.
-        </p>
+        </div>
       </div>
     </footer>
   )

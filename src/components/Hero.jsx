@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { usePageImages } from '../hooks/usePageImages'
 import { isVideoUrl } from '../data/images'
+import { heroPoints } from '../data/siteContent'
 import { AddImageButton } from './AddImageButton'
 
 export function Hero() {
@@ -113,26 +114,44 @@ export function Hero() {
             Celebrations, crafted
           </p>
           <h1 className="mt-2 font-serif text-4xl font-medium leading-[1.15] text-ink drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] md:text-5xl">
-            Plan Your Dream With Us
+            We Plan Moments You'll Remember Forever
           </h1>
           <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-ink/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)] md:text-base">
-            Wedding, family, and sacred gatherings — designed with warmth, ritual, and an editorial eye for every moment.
+            From dream weddings and destination celebrations to birthdays, anniversaries and
+            corporate events — we plan, design and manage every detail for you.
           </p>
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            className="mt-7 inline-flex rounded-full bg-rose-dust px-7 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-cream transition hover:bg-rose-deep md:text-sm"
-          >
-            Contact Now
-          </motion.a>
-          <div className="mx-auto mt-7 h-px w-14 bg-rose-dust/70" />
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex rounded-full bg-rose-dust px-7 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-cream transition hover:bg-rose-deep md:text-sm"
+            >
+              Plan My Event
+            </motion.a>
+            <motion.a
+              href="#gallery"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex rounded-full border border-rose-dust/60 px-7 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-ink transition hover:bg-rose-dust/15 md:text-sm"
+            >
+              View Our Work
+            </motion.a>
+          </div>
+          <ul className="mx-auto mt-7 flex max-w-md flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[0.7rem] font-medium uppercase tracking-[0.14em] text-ink/85 md:text-xs">
+            {heroPoints.map((point) => (
+              <li key={point} className="flex items-center gap-1.5">
+                <span className="text-rose-dust" aria-hidden>✓</span>
+                {point}
+              </li>
+            ))}
+          </ul>
         </motion.div>
       </div>
 
       <motion.a
-        href="#about"
-        aria-label="Scroll to about"
+        href="#services"
+        aria-label="Scroll to services"
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute bottom-8 left-1/2 z-10 flex h-11 w-11 -translate-x-1/2 items-center justify-center border border-rose-dust/50 text-rose-dust"

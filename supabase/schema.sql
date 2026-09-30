@@ -95,6 +95,9 @@ create table if not exists public.inquiries (
   guests text not null default '',
   occasion text not null default '',
   preference text not null default '',
+  event_date text not null default '',
+  budget text not null default '',
+  message text not null default '',
   created_at timestamptz not null default now()
 );
 

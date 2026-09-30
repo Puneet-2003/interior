@@ -9,13 +9,13 @@ export function Stories() {
   const { unlocked } = useOwnerMode()
 
   return (
-    <section id="stories" className="relative bg-cream py-24 md:py-32">
+    <section id="gallery" className="relative bg-cream py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <motion.div {...fadeUp} className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <p className="font-script text-3xl text-rose-dust md:text-4xl">Amazing work</p>
+            <p className="font-script text-3xl text-rose-dust md:text-4xl">Our work</p>
             <h2 className="mt-1 font-serif text-4xl font-medium uppercase tracking-[0.08em] text-ink md:text-5xl">
-              Featured Wedding Story
+              Portfolio & Celebrations
             </h2>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-ink-muted md:text-lg">
               Moments from weddings and celebrations we have been trusted to shape.

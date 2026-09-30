@@ -48,13 +48,13 @@ export function Functions() {
 
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
         <motion.div {...fadeUp} className="text-center">
-          <p className="font-script text-3xl text-rose-dust md:text-4xl">What we host</p>
+          <p className="font-script text-3xl text-rose-dust md:text-4xl">Browse by function</p>
           <div className="velvet-panel mx-auto mt-5 inline-block px-10 py-4 shadow-[0_14px_40px_rgba(0,0,0,0.5)]">
-            <h2 className="font-serif text-3xl font-medium text-cream md:text-4xl">Our Best Services</h2>
+            <h2 className="font-serif text-3xl font-medium text-cream md:text-4xl">Project Galleries</h2>
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink-muted md:text-lg">
-            One place for every celebration — wedding rituals, baby & family milestones, and sacred
-            gatherings. Choose a function to open its project gallery.
+            Open a function to see real celebrations we have designed — wedding rituals, baby &
+            family milestones, and sacred gatherings.
           </p>
         </motion.div>
 

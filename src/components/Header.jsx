@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
-import { company } from '../data/company'
+import { company, companyPhoneHref, whatsappHref } from '../data/company'
 
 const nav = [
   { label: 'Home', href: '#home' },
+  { label: 'Services', href: '#services' },
+  { label: 'Packages', href: '#packages' },
+  { label: 'Destinations', href: '#destinations' },
+  { label: 'Gallery', href: '#gallery' },
   { label: 'About', href: '#about' },
-  { label: 'Functions', href: '#functions' },
-  { label: 'Stories', href: '#stories' },
-  { label: 'Testimonials', href: '#testimonials' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -36,7 +37,7 @@ export function Header() {
       <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-x-6 px-5 py-4 md:px-8 lg:grid-cols-[auto_1fr_auto]">
         <a href="#home" className="shrink-0 leading-tight">
           <span
-            className={`font-script text-4xl transition-colors md:text-5xl ${
+            className={`block whitespace-nowrap font-script text-3xl transition-colors md:text-5xl ${
               onHero ? 'text-ink' : 'text-rose-dust'
             }`}
           >
@@ -71,12 +72,22 @@ export function Header() {
 
         <div className="flex items-center justify-end gap-3">
           <motion.a
-            href="#contact"
+            href={companyPhoneHref}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="hidden bg-rose-dust px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-cream transition hover:bg-rose-deep md:inline-flex"
+            className="hidden border border-rose-dust/50 px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-ink transition hover:bg-rose-dust/15 md:inline-flex"
           >
-            Inquire
+            Call Now
+          </motion.a>
+          <motion.a
+            href={whatsappHref}
+            target="_blank"
+            rel="noreferrer"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            className="hidden bg-rose-dust px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-cream transition hover:bg-rose-deep md:inline-flex"
+          >
+            WhatsApp
           </motion.a>
 
           <button
@@ -125,7 +136,16 @@ export function Header() {
               className="mt-2 bg-rose-dust px-4 py-2.5 text-center text-cream"
               onClick={() => setOpen(false)}
             >
-              Inquire
+              Get Quote
+            </a>
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+              className="border border-rose-dust/50 px-4 py-2.5 text-center text-ink"
+              onClick={() => setOpen(false)}
+            >
+              WhatsApp
             </a>
           </nav>
         </motion.div>

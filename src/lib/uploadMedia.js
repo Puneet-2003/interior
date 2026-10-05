@@ -1,40 +1,18 @@
-import { MEDIA_BUCKET, isSupabaseConfigured, supabase } from './supabaseClient'
-
 const MAX_BYTES = 50 * 1024 * 1024
 
-function safeName(name) {
-  const dot = name.lastIndexOf('.')
-  const base = dot > 0 ? name.slice(0, dot) : name
-  const ext = dot > 0 ? name.slice(dot + 1).toLowerCase() : 'bin'
-  const slug =
-    base
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-      .slice(0, 60) || 'file'
-  return `${slug}.${ext.replace(/[^a-z0-9]/g, '')}`
-}
-
 /**
- * Upload a picked file to the public bucket and return its permanent URL.
- * The section path becomes the folder so the bucket stays browsable.
+ * Handle a locally selected media file without Supabase storage dependency.
+ * Converts local files to base64 Data URLs so they can be previewed or saved
+ * without external storage bucket calls.
  */
-export async function uploadMedia(file, folder = 'uploads') {
-  if (!isSupabaseConfigured) {
-    throw new Error('Supabase keys are missing, so uploads are disabled.')
-  }
+export async function uploadMedia(file) {
   if (!file) throw new Error('Choose a file first.')
   if (file.size > MAX_BYTES) throw new Error('That file is larger than 50 MB.')
 
-  const key = `${folder.replace(/[^a-zA-Z0-9._-]+/g, '-')}/${Date.now()}-${safeName(file.name)}`
-
-  const { error } = await supabase.storage.from(MEDIA_BUCKET).upload(key, file, {
-    cacheControl: '31536000',
-    contentType: file.type || undefined,
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = () => reject(new Error('Failed to read local file.'))
+    reader.readAsDataURL(file)
   })
-  if (error) throw new Error(`Upload failed: ${error.message}`)
-
-  const { data } = supabase.storage.from(MEDIA_BUCKET).getPublicUrl(key)
-  if (!data?.publicUrl) throw new Error('Upload finished but no public URL was returned.')
-  return data.publicUrl
 }

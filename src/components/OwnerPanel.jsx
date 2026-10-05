@@ -5,7 +5,6 @@ import { usePageImages } from '../hooks/usePageImages'
 import { useTestimonials } from '../hooks/useTestimonials'
 import { imageSectionGroups, imageSectionOptions } from '../data/imageSections'
 import { getAddedImages } from '../data/images'
-import { isSupabaseConfigured } from '../lib/supabaseClient'
 import { uploadMedia } from '../lib/uploadMedia'
 import { isValidUrl } from '../lib/url'
 
@@ -254,30 +253,19 @@ function StatusPanel() {
   const imageCount = Number(
     useSyncExternalStore(subscribeImages, countAddedImages, countAddedImages),
   )
-  const { items, loaded } = useTestimonials()
-
-  if (!isSupabaseConfigured) {
-    return (
-      <p className="text-xs leading-relaxed text-ink-muted">
-        Not connected to the database yet, so anything you add stays in this browser only. Add{' '}
-        <span className="font-mono text-[0.7rem]">VITE_SUPABASE_URL</span> and{' '}
-        <span className="font-mono text-[0.7rem]">VITE_SUPABASE_ANON_KEY</span> to{' '}
-        <span className="font-mono text-[0.7rem]">.env.local</span> and restart the site.
-      </p>
-    )
-  }
+  const { items } = useTestimonials()
 
   return (
     <div className="space-y-3 text-xs leading-relaxed text-ink-muted">
       <p className="flex items-center gap-2 font-semibold uppercase tracking-[0.12em] text-ink">
         <span className="h-2 w-2 rounded-full bg-emerald-500" aria-hidden />
-        Saving to the database
+        Cloudinary CDN Media Active
       </p>
       <p>
-        {imageCount} image{imageCount === 1 ? '' : 's'} and {items.length} testimonial
-        {items.length === 1 ? '' : 's'} are stored online
-        {loaded ? '' : ' (still loading…)'}. Everything you add here appears for every visitor
-        straight away — no publishing step needed.
+        All images and videos are loaded and optimized via Cloudinary CDN with automatic WebP/AVIF compression.
+      </p>
+      <p>
+        {imageCount} custom image{imageCount === 1 ? '' : 's'} and {items.length} testimonial{items.length === 1 ? '' : 's'} saved locally.
       </p>
     </div>
   )
@@ -309,20 +297,14 @@ export function OwnerPanel() {
               <p className="text-[0.65rem] uppercase tracking-[0.14em] text-ink-muted">
                 Hidden controls
               </p>
-              <p
-                className={`mt-1 flex items-center gap-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.1em] ${
-                  isSupabaseConfigured ? 'text-emerald-400' : 'text-rose-400'
-                }`}
-              >
+              <p className="mt-1 flex items-center gap-1.5 text-[0.62rem] font-semibold uppercase tracking-[0.1em] text-emerald-400">
                 <span
-                  className={`flex h-3.5 w-3.5 items-center justify-center rounded-full text-[0.55rem] text-white ${
-                    isSupabaseConfigured ? 'bg-emerald-600' : 'bg-rose-600'
-                  }`}
+                  className="flex h-3.5 w-3.5 items-center justify-center rounded-full text-[0.55rem] text-white bg-emerald-600"
                   aria-hidden
                 >
-                  {isSupabaseConfigured ? '✓' : '!'}
+                  ✓
                 </span>
-                {isSupabaseConfigured ? 'Saving to database' : 'Database not connected'}
+                Cloudinary CDN Active
               </p>
             </div>
             <button
@@ -367,41 +349,4 @@ export function OwnerPanel() {
   )
 }
 
-/**
- * Invisible hot-spot only the owner should know about.
- * Location: bottom-left corner of the footer copyright line — looks like normal text,
- * unlocks after 3 quick clicks on the © year.
- */
-export function SecretOwnerTrigger() {
-  const { unlocked, unlock } = useOwnerMode()
-  const clicksRef = useRef(0)
-  const timerRef = useRef(null)
-
-  const onClick = () => {
-    if (unlocked) return
-    clicksRef.current += 1
-    if (timerRef.current) window.clearTimeout(timerRef.current)
-    if (clicksRef.current >= 3) {
-      clicksRef.current = 0
-      unlock()
-      return
-    }
-    timerRef.current = window.setTimeout(() => {
-      clicksRef.current = 0
-    }, 1200)
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-hidden="true"
-      tabIndex={-1}
-      title=""
-      className="cursor-default select-none border-0 bg-transparent p-0 text-inherit"
-      style={{ outline: 'none' }}
-    >
-      {new Date().getFullYear()}
-    </button>
-  )
-}
+export { SecretOwnerTrigger } from './SecretOwnerTrigger'

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { optimizeCloudinary } from '../lib/url'
 
 /**
  * Infinite auto-scrolling image strip. Pauses on hover / focus / reduced motion.
@@ -44,12 +45,14 @@ export function AutoGallery({
           className="relative aspect-[3/4] w-[min(78vw,340px)] shrink-0 overflow-hidden rounded-2xl sm:w-[300px] md:w-[340px] lg:w-[380px]"
         >
           <img
-            src={src}
+            src={optimizeCloudinary(src, { width: 600 })}
             alt={copyIndex === 0 ? `${label} celebration moment ${i + 1} - Dream City Events Gwalior` : ''}
             className="h-full w-full object-cover transition duration-700 hover:scale-105"
             draggable={false}
             decoding="async"
-            loading={copyIndex === 0 && i < 4 ? 'eager' : 'lazy'}
+            loading="lazy"
+            width="340"
+            height="453"
           />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-cream/80 to-transparent p-3 pt-12">
             <span className="inline-block bg-cream/85 px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.14em] text-ink">

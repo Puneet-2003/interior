@@ -30,34 +30,38 @@ export function Hero() {
   return (
     <section id="home" ref={ref} className="relative min-h-[100svh] overflow-hidden bg-cream">
       <motion.div style={{ scale: scaleBg, y: yBg }} className="absolute inset-0">
-        {heroVideo ? (
+        {/* High-priority instant poster image to prevent any blank hero or LCP delay */}
+        {heroBg && (
+          <img
+            src={heroBg}
+            alt="Dream City Events Gwalior Luxury Wedding Celebration"
+            fetchPriority="high"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover object-top"
+          />
+        )}
+        {heroVideo && (
           <AnimatePresence initial={false}>
             <motion.video
               key={heroVideo}
               className="absolute inset-0 h-full w-full object-cover object-top"
-              src={heroVideo}
               poster={heroBg}
               autoPlay
               muted
               loop={heroVideos.length === 1}
               playsInline
-              preload="auto"
+              preload="metadata"
               aria-hidden="true"
               role="none"
               onEnded={showNextVideo}
-              initial={{ opacity: 0 }}
+              initial={false}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.8, ease: 'easeInOut' }}
-            />
+            >
+              <source src={heroVideo} type="video/mp4" />
+            </motion.video>
           </AnimatePresence>
-        ) : (
-          heroBg && (
-            <div
-              className="absolute inset-0 bg-cover bg-top"
-              style={{ backgroundImage: `url(${heroBg})` }}
-            />
-          )
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-cream/30 via-cream/20 to-cream/70" />
       </motion.div>
@@ -106,9 +110,9 @@ export function Hero() {
       <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-2xl items-center justify-center px-5 py-28 md:px-8">
         <motion.div
           style={{ y: overlayY }}
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0.9, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.95, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
           className="w-full max-w-xl bg-transparent px-4 py-6 text-center md:px-6"
         >
           <div className="mx-auto mb-5 h-px w-14 bg-rose-dust/70" />
@@ -116,8 +120,11 @@ export function Hero() {
             Celebrations, crafted in Gwalior
           </p>
           <h1 className="mt-2 font-serif text-4xl font-medium leading-[1.15] text-ink drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] md:text-5xl">
-            We Plan Moments You'll Remember Forever
+            Best Wedding Planner &amp; Event Management in Gwalior
           </h1>
+          <p className="mx-auto mt-3 font-serif text-lg italic text-ink/85 md:text-xl">
+            We Plan Moments You'll Remember Forever
+          </p>
           <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-ink/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)] md:text-base">
             From luxury weddings in Gwalior and royal destination celebrations to birthdays, anniversaries, and
             corporate events — Dream City Events plans, designs, and manages every detail with elegance.

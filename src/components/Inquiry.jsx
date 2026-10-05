@@ -4,7 +4,6 @@ import { fadeUp } from '../lib/motion'
 import { Dropdown } from './Dropdown'
 import { celebrationGroups, CUSTOM_EVENT } from '../data/celebrations'
 import { company } from '../data/company'
-import { supabase } from '../lib/supabaseClient'
 
 const CUSTOM_GUESTS = 'Custom'
 
@@ -61,13 +60,19 @@ export function Inquiry() {
       message: form.message.trim(),
     }
 
-    if (supabase) {
-      supabase.from('inquiries').insert(enquiry).then(({ error }) => {
-        if (error) console.error('Failed to save enquiry:', error.message)
+    // Dynamically load database client on submit so it does not block initial page load
+    import('../lib/supabaseClient')
+      .then(({ supabase }) => {
+        if (supabase) {
+          return supabase.from('inquiries').insert(enquiry)
+        }
       })
-    } else {
-      console.warn('Supabase is not configured — enquiry was not saved to the database.')
-    }
+      .then((res) => {
+        if (res?.error) console.error('Failed to save enquiry:', res.error.message)
+      })
+      .catch((err) => {
+        console.warn('Could not record enquiry:', err)
+      })
 
     // Opened synchronously inside the submit gesture, otherwise popup blockers reject it.
     if (whatsappNumber) {

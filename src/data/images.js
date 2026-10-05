@@ -1,23 +1,23 @@
 /**
- * Cloudinary (or CDN) image URL arrays per page/section.
- * Replace any URL with your Cloudinary delivery links, e.g.
- * https://res.cloudinary.com/<cloud_name>/image/upload/v123/folder/photo.jpg
+ * Image data and section helpers for Dream City Events Gwalior.
+ *
+ * All image assets are powered by Cloudinary and defined canonically in ./image.js.
+ * ZERO runtime dependency on Supabase for image storage or delivery.
  *
  * Functions use category + subcategory:
- *   functions.wedding.haldi
- *   functions.baby.mehendi
- *   functions.religious.mata-ki-chowki
+ *   functions.wedding.mehendi-haldi
+ *   functions.baby.baby-shower-godh-bharai
+ *   functions.religious.satyanarayan-katha
  *
- * Extra URLs added via the UI live in the Supabase `site_images` table and are
- * merged with these defaults at runtime. localStorage is kept only as an offline
- * mirror so a returning visitor sees content before the network responds.
+ * Any images saved by the owner via the UI are persisted in localStorage for
+ * instant, zero-latency delivery without external database network requests.
  */
 
-import { isSupabaseConfigured, supabase } from '../lib/supabaseClient'
+import { image, images } from './image'
+
+export { image, images }
 
 export const STORAGE_KEY = 'dhi-cloudinary-images'
-
-const TABLE = 'site_images'
 const EVENT = 'dhi-images-change'
 
 const VIDEO_EXTENSION = /\.(mp4|webm|ogv|mov|m4v)(\?|#|$)/i
@@ -30,35 +30,35 @@ export function isVideoUrl(url) {
   return VIDEO_EXTENSION.test(url) || url.includes('/video/upload/')
 }
 
-/** Keys must match functionCategories item ids in functions.js */
+/** Keys match functionCategories item ids in functions.js */
 const weddingDefaults = {
   'engagement-ring-ceremony': [
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/See_The_Most_Stunning_Indian-American_Wedding_hxecdb.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320822/Celebrations25_Festive25_WeddingWire2026_n3bd94.jpg',
+    image.weddingBanner,
+    image.festive,
   ],
   'mehendi-haldi': [
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321040/Flower_themed_Haldi___Haldi_Ideas___Haldi_Inspo___yh7xnc.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321039/download_rxyp1x.jpg',
+    image.haldi,
+    image.decor,
   ],
   'wedding-ceremony': [
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321038/Indian_Wedding_Phere_rwge20.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320821/A_wedding_filled_with_soft_florals_golden_light_and_timeless_emotion__From_intimate_moments_beneath_the_mandap_to_quiet_glances_that_spoke_louder_than_words_every_detail_of_this_celebration_captured_the_beauty_of_m_kkh51f.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/marriage_talambralu_swh01f.jpg',
+    image.phere,
+    image.florals,
+    image.talambralu,
   ],
   'baraat-reception': [
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/Wedding_Photography_feuc26.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_2_a80bce.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_vadwhi.jpg',
+    image.photography,
+    image.entry,
+    image.stage,
   ],
 }
 
-/** Paste Cloudinary URLs of real baby & family events here. */
+/** Baby & family events category */
 const babyDefaults = {
   'baby-shower-godh-bharai': [],
   'naming-ceremony-naamkaran': [],
 }
 
-/** Paste Cloudinary URLs of real religious events here. */
+/** Religious events category */
 const religiousDefaults = {
   'satyanarayan-katha': [],
   'bhagwat-katha': [],
@@ -69,41 +69,24 @@ const religiousDefaults = {
 export const pageImages = {
   home: {
     hero: [
-      // Direct video delivery URL (not the player embed page).
-      'https://res.cloudinary.com/ddelf4odl/video/upload/v1785309210/15157499-hd_1920_1080_25fps_umckg8.mp4',
-      // Poster image while the video loads:
-      'https://res.cloudinary.com/ddelf4odl/image/upload/v1785307075/Bride_says_-_The_internet_brought_us_together_destiny_did_the_rest__From_whispered_mentions_by_mutual_friends_to_a_bond_that_felt_just_right_-_every_little_sign_led_us_here__t_f_On_this_day_we_celebrated_love_laugh_srmaa6.jpg',
+      // Web-friendly H.264 MP4 video delivery URL (compressed with q_auto, w_1280):
+      image.heroVideo,
+      // High-performance lightweight poster frame (~58 KB) extracted directly from the hero video:
+      image.heroPoster,
     ],
-    about: [
-      'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321038/Indian_Wedding_Phere_rwge20.jpg',
-      'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320822/Celebrations25_Festive25_WeddingWire2026_n3bd94.jpg',
-      'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321040/Flower_themed_Haldi___Haldi_Ideas___Haldi_Inspo___yh7xnc.jpg',
-      'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321039/download_rxyp1x.jpg',
-      'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321038/download_1_c1jc3u.jpg',
-      'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320821/A_wedding_filled_with_soft_florals_golden_light_and_timeless_emotion__From_intimate_moments_beneath_the_mandap_to_quiet_glances_that_spoke_louder_than_words_every_detail_of_this_celebration_captured_the_beauty_of_m_kkh51f.jpg'
-      
-    ],
+    about: images.about,
   },
   functions: {
     wedding: weddingDefaults,
     baby: babyDefaults,
     religious: religiousDefaults,
   },
-  stories: [
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_2_a80bce.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_vadwhi.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/See_The_Most_Stunning_Indian-American_Wedding_hxecdb.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/marriage_talambralu_swh01f.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_1_v8uenc.jpg',
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/Wedding_Photography_feuc26.jpg',
-  
-  ],
-  testimonials: [
-    'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320821/A_wedding_filled_with_soft_florals_golden_light_and_timeless_emotion__From_intimate_moments_beneath_the_mandap_to_quiet_glances_that_spoke_louder_than_words_every_detail_of_this_celebration_captured_the_beauty_of_m_kkh51f.jpg',
-  ],
+  stories: images.gallery,
+  testimonials: images.testimonials,
 }
 
 function readMirror() {
+  if (typeof window === 'undefined') return {}
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     const parsed = raw ? JSON.parse(raw) : {}
@@ -114,8 +97,6 @@ function readMirror() {
 }
 
 let extrasCache = readMirror()
-let loaded = !isSupabaseConfigured
-let inFlight = null
 
 function readExtras() {
   return extrasCache
@@ -123,73 +104,26 @@ function readExtras() {
 
 function setExtras(next) {
   extrasCache = next
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
-  } catch {
-    // Private browsing or a full quota — the in-memory copy still works.
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+    } catch {
+      // Private browsing or a full quota — in-memory copy still works
+    }
+    window.dispatchEvent(new Event(EVENT))
   }
-  window.dispatchEvent(new Event(EVENT))
-}
-
-function groupRows(rows) {
-  const grouped = {}
-  for (const row of rows) {
-    const list = grouped[row.section_path] ?? (grouped[row.section_path] = [])
-    if (!list.includes(row.url)) list.push(row.url)
-  }
-  return grouped
 }
 
 /**
- * First run against an empty table: copy up anything that was added back when
- * this browser was the only storage, so nothing disappears.
+ * Returns instant synchronous cached images.
+ * Zero network requests to Supabase or any remote database.
  */
-async function copyMirrorToSupabase() {
-  const pending = Object.entries(extrasCache).flatMap(([section_path, urls]) =>
-    (Array.isArray(urls) ? urls : []).map((url) => ({ section_path, url })),
-  )
-  if (!pending.length) return []
-
-  const { data, error } = await supabase.from(TABLE).insert(pending).select('section_path, url')
-  if (error) {
-    console.error('Could not copy this browser’s images into Supabase.', error)
-    return pending
-  }
-  return data ?? pending
-}
-
-async function fetchImages() {
-  try {
-    const { data, error } = await supabase
-      .from(TABLE)
-      .select('section_path, url')
-      .order('created_at', { ascending: true })
-    if (error) throw error
-
-    const rows = data?.length ? data : await copyMirrorToSupabase()
-    loaded = true
-    setExtras(groupRows(rows))
-  } catch (error) {
-    // Keep the mirrored copy visible and allow a later retry.
-    console.error('Could not load images from Supabase.', error)
-  }
-  return extrasCache
-}
-
-/** Fetch every saved image once per page load. */
 export function loadImages() {
-  if (loaded || !isSupabaseConfigured) return Promise.resolve(extrasCache)
-  if (inFlight) return inFlight
-
-  inFlight = fetchImages().finally(() => {
-    inFlight = null
-  })
-
-  return inFlight
+  return Promise.resolve(extrasCache)
 }
 
 export function areImagesLoaded() {
-  return loaded
+  return true
 }
 
 /** Flatten nested defaults for a path like "home.about" or "functions.wedding.haldi" */
@@ -270,7 +204,7 @@ export function getImages(path) {
   return [...defaults, ...added]
 }
 
-/** Save an image URL for a section so every visitor sees it. */
+/** Save an image URL for a section locally without Supabase dependency */
 export async function addImage(path, url) {
   const trimmed = url.trim()
   if (!trimmed) return getImages(path)
@@ -282,41 +216,18 @@ export async function addImage(path, url) {
   }
 
   setExtras({ ...previous, [path]: [...list, trimmed] })
-
-  if (isSupabaseConfigured) {
-    const { error } = await supabase
-      .from(TABLE)
-      .insert({ section_path: path, url: trimmed })
-    if (error) {
-      setExtras(previous)
-      throw new Error(`Could not save the image: ${error.message}`)
-    }
-  }
-
   return getImages(path)
 }
 
+/** Remove an added image URL for a section */
 export async function removeAddedImage(path, url) {
   const previous = extrasCache
   const list = Array.isArray(previous[path]) ? previous[path] : []
   setExtras({ ...previous, [path]: list.filter((u) => u !== url) })
-
-  if (isSupabaseConfigured) {
-    const { error } = await supabase
-      .from(TABLE)
-      .delete()
-      .eq('section_path', path)
-      .eq('url', url)
-    if (error) {
-      setExtras(previous)
-      throw new Error(`Could not remove the image: ${error.message}`)
-    }
-  }
-
   return getImages(path)
 }
 
-/** Everything added on this browser, keyed by section path — used to export into source. */
+/** Everything added on this browser, keyed by section path */
 export function getAddedImages() {
   return readExtras()
 }

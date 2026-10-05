@@ -28,6 +28,8 @@ export function InstagramStrip() {
                 alt={`Celebration moment ${i + 1} - Dream City Events Gwalior`}
                 loading="lazy"
                 decoding="async"
+                width="300"
+                height="300"
                 className="aspect-square w-full object-cover transition duration-700 group-hover:scale-105"
               />
             </div>
@@ -39,7 +41,7 @@ export function InstagramStrip() {
             <motion.a
               href={company.instagram}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               className="inline-flex border border-rose-dust/50 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-ink transition hover:bg-rose-dust/15"

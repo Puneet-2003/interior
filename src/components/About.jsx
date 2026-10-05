@@ -94,18 +94,14 @@ export function About() {
           >
             {main && (
               <div className="col-span-7 row-span-2 overflow-hidden shadow-xl">
-                <motion.img
+                <img
                   src={main}
                   alt="Luxury wedding celebration in Gwalior by Dream City Events"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, margin: '-80px' }}
-                  animate={{ scale: [1, 1.09, 1] }}
-                  transition={{
-                    opacity: { duration: 0.9 },
-                    scale: { duration: 16, repeat: Infinity, ease: 'easeInOut' },
-                  }}
-                  className="h-full min-h-[280px] w-full object-cover md:min-h-[420px]"
+                  loading="lazy"
+                  decoding="async"
+                  width="600"
+                  height="420"
+                  className="h-full min-h-[280px] w-full object-cover transition-transform duration-1000 ease-out hover:scale-105 md:min-h-[420px]"
                 />
               </div>
             )}
@@ -124,6 +120,8 @@ export function About() {
                     alt={`Royal wedding and event decoration showcase ${i + 1} - Dream City Events Gwalior`}
                     loading="lazy"
                     decoding="async"
+                    width="400"
+                    height="280"
                     className="h-full min-h-[130px] w-full object-cover transition duration-700 group-hover:scale-105"
                   />
                 </motion.div>
@@ -143,6 +141,8 @@ export function About() {
                   alt={`Destination wedding and reception venue setup ${i + 3} - Dream City Events`}
                   loading="lazy"
                   decoding="async"
+                  width="400"
+                  height="260"
                   className="h-full min-h-[120px] w-full object-cover transition duration-700 group-hover:scale-105"
                 />
               </motion.div>

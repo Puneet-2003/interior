@@ -19,8 +19,18 @@ function subscribe(callback) {
   }
 }
 
+const snapshotCache = new Map()
+
 function getSnapshot(path) {
-  return JSON.stringify({ loaded: areImagesLoaded(), images: getImages(path) })
+  const images = getImages(path)
+  const loaded = areImagesLoaded()
+  const key = `${path}:${loaded}:${images.length}:${images[0] || ''}`
+  let snap = snapshotCache.get(key)
+  if (!snap) {
+    snap = JSON.stringify({ loaded, images })
+    snapshotCache.set(key, snap)
+  }
+  return snap
 }
 
 /** Live list of images for a page section path (e.g. "stories", "home.hero"). */

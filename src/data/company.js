@@ -9,7 +9,8 @@ export const company = {
   tagline: 'Events & Celebrations',
   phone: '+91 88276 88283',
   website: 'https://dreamcityeventsgwalior.com',
-  instagram: '', // e.g. 'https://instagram.com/yourhandle' — hidden until the real account is added
+  instagram: 'https://www.instagram.com/dreamcityeventsgwalior',
+  facebook: 'https://www.facebook.com/dreamcityeventsgwalior',
   address: {
     line1: '1st Floor, Shop No. 2, Main Road, near Gagan Plaza, above Sky Gold Hair Salon',
     line2: 'Kalpi Bridge Colony, Mahaveer, Morar, Gwalior, Madhya Pradesh 474005',

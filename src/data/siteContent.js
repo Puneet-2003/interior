@@ -7,18 +7,20 @@
  * - Images reuse the existing Cloudinary assets already shown on the site.
  */
 
+import { image } from './image'
+
 const IMG = {
-  wedding: 'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/See_The_Most_Stunning_Indian-American_Wedding_hxecdb.jpg',
-  festive: 'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320822/Celebrations25_Festive25_WeddingWire2026_n3bd94.jpg',
-  haldi: 'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321040/Flower_themed_Haldi___Haldi_Ideas___Haldi_Inspo___yh7xnc.jpg',
-  decor: 'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321039/download_rxyp1x.jpg',
-  phere: 'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321038/Indian_Wedding_Phere_rwge20.jpg',
-  florals: 'https://res.cloudinary.com/ddelf4odl/image/upload/v1785320821/A_wedding_filled_with_soft_florals_golden_light_and_timeless_emotion__From_intimate_moments_beneath_the_mandap_to_quiet_glances_that_spoke_louder_than_words_every_detail_of_this_celebration_captured_the_beauty_of_m_kkh51f.jpg',
-  talambralu: 'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/marriage_talambralu_swh01f.jpg',
-  photography: 'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/Wedding_Photography_feuc26.jpg',
-  entry: 'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_2_a80bce.jpg',
-  stage: 'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_vadwhi.jpg',
-  couple: 'https://res.cloudinary.com/ddelf4odl/image/upload/v1785321706/download_1_v8uenc.jpg',
+  wedding: image.weddingBanner,
+  festive: image.festive,
+  haldi: image.haldi,
+  decor: image.decor,
+  phere: image.phere,
+  florals: image.florals,
+  talambralu: image.talambralu,
+  photography: image.photography,
+  entry: image.entry,
+  stage: image.stage,
+  couple: image.couple,
 }
 
 export const services = [

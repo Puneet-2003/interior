@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { fadeUp } from '../lib/motion'
-import { SecretOwnerTrigger } from './OwnerPanel'
+import { SecretOwnerTrigger } from './SecretOwnerTrigger'
 import { company, companyPhoneHref, companyAddressText, whatsappHref } from '../data/company'
 
 const quickLinks = [
@@ -115,7 +115,19 @@ export function ContactFooter() {
                     rel="noreferrer noopener"
                     className="transition hover:text-rose-dust"
                   >
-                    Instagram
+                    Follow on Instagram
+                  </a>
+                </p>
+              )}
+              {company.facebook && (
+                <p>
+                  <a
+                    href={company.facebook}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="transition hover:text-rose-dust"
+                  >
+                    Follow on Facebook
                   </a>
                 </p>
               )}

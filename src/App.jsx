@@ -1,12 +1,16 @@
+import { lazy, Suspense } from 'react'
 import { LandingPage } from './LandingPage'
 import { OwnerModeProvider } from './hooks/useOwnerMode'
-import { OwnerPanel } from './components/OwnerPanel'
+
+const OwnerPanel = lazy(() => import('./components/OwnerPanel').then((m) => ({ default: m.OwnerPanel })))
 
 export default function App() {
   return (
     <OwnerModeProvider>
       <LandingPage />
-      <OwnerPanel />
+      <Suspense fallback={null}>
+        <OwnerPanel />
+      </Suspense>
     </OwnerModeProvider>
   )
 }

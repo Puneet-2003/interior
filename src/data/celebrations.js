@@ -27,6 +27,7 @@ export const celebrationGroups = [
       'Destination Wedding',
       'Intimate / Small Wedding',
       'Luxury Wedding',
+      'Artist Management (Bollywood & Foreign Artists)',
       'Court Marriage Celebration',
     ],
   },

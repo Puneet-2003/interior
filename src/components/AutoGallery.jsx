@@ -45,9 +45,10 @@ export function AutoGallery({
         >
           <img
             src={src}
-            alt={copyIndex === 0 ? `${label} ${i + 1}` : ''}
+            alt={copyIndex === 0 ? `${label} celebration moment ${i + 1} - Dream City Events Gwalior` : ''}
             className="h-full w-full object-cover transition duration-700 hover:scale-105"
             draggable={false}
+            decoding="async"
             loading={copyIndex === 0 && i < 4 ? 'eager' : 'lazy'}
           />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-cream/80 to-transparent p-3 pt-12">

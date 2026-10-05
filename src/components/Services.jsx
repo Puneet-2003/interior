@@ -34,8 +34,11 @@ export function Services() {
               <div className="overflow-hidden">
                 <img
                   src={service.image}
-                  alt={service.title}
+                  alt={`${service.title} - Dream City Events Gwalior`}
                   loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="300"
                   className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105"
                 />
               </div>

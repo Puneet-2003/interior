@@ -20,14 +20,22 @@ export function Faq() {
           {faqs.map((faq, i) => {
             const isOpen = open === i
             return (
-              <div key={faq.q} className="border-b border-cream-deep">
+              <div
+                key={faq.q}
+                className="border-b border-cream-deep"
+                itemScope
+                itemProp="mainEntity"
+                itemType="https://schema.org/Question"
+              >
                 <button
                   type="button"
                   aria-expanded={isOpen}
                   onClick={() => setOpen(isOpen ? -1 : i)}
                   className="flex w-full items-center justify-between gap-6 py-5 text-left"
                 >
-                  <span className="font-serif text-lg text-ink md:text-xl">{faq.q}</span>
+                  <h3 itemProp="name" className="font-serif text-lg text-ink md:text-xl">
+                    {faq.q}
+                  </h3>
                   <motion.span
                     animate={{ rotate: isOpen ? 45 : 0 }}
                     transition={{ duration: 0.25 }}
@@ -45,8 +53,13 @@ export function Faq() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden"
+                      itemScope
+                      itemProp="acceptedAnswer"
+                      itemType="https://schema.org/Answer"
                     >
-                      <p className="pb-6 pr-10 text-base leading-relaxed text-ink-muted">{faq.a}</p>
+                      <p itemProp="text" className="pb-6 pr-10 text-base leading-relaxed text-ink-muted">
+                        {faq.a}
+                      </p>
                     </motion.div>
                   )}
                 </AnimatePresence>

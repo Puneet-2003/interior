@@ -25,8 +25,9 @@ export function InstagramStrip() {
             <div key={src} className="group overflow-hidden">
               <img
                 src={src}
-                alt={`Celebration moment ${i + 1}`}
+                alt={`Celebration moment ${i + 1} - Dream City Events Gwalior`}
                 loading="lazy"
+                decoding="async"
                 className="aspect-square w-full object-cover transition duration-700 group-hover:scale-105"
               />
             </div>

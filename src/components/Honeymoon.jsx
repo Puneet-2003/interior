@@ -36,8 +36,11 @@ export function Honeymoon() {
               <div className="overflow-hidden">
                 <img
                   src={pkg.image}
-                  alt={`${pkg.name} honeymoon`}
+                  alt={`${pkg.name} Honeymoon Tour Package - Dream City Events Gwalior`}
                   loading="lazy"
+                  decoding="async"
+                  width="480"
+                  height="300"
                   className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-105"
                 />
               </div>

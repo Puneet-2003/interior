@@ -53,8 +53,8 @@ export const services = [
     image: IMG.talambralu,
   },
   {
-    title: 'Entertainment & Special Effects',
-    text: 'Artists, special entries and effects — arranged wherever legally permitted.',
+    title: 'Artist Management & Entertainment',
+    text: 'Bollywood star artists, TV performers, foreign (Russian) artists, live performers and special entries.',
     image: IMG.entry,
   },
   {
@@ -67,7 +67,16 @@ export const services = [
 export const eventCategories = [
   {
     title: 'Weddings',
-    items: ['Traditional Wedding', 'Luxury Wedding', 'Destination Wedding', 'Intimate Wedding'],
+    items: [
+      'Traditional Wedding',
+      'Luxury Wedding',
+      'Destination Wedding',
+      'Intimate Wedding',
+      'Artist Management',
+      'Bollywood Star Artists',
+      'Television Performers',
+      'Foreign (Russian) Artists',
+    ],
   },
   {
     title: 'Wedding Functions',

@@ -1,0 +1,3 @@
+# Single Page Application (SPA) Route Redirects
+# Ensures all route requests fallback cleanly to index.html without 404 errors
+/*    /index.html   200

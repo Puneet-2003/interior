@@ -42,6 +42,8 @@ export function Hero() {
               loop={heroVideos.length === 1}
               playsInline
               preload="auto"
+              aria-hidden="true"
+              role="none"
               onEnded={showNextVideo}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -111,14 +113,14 @@ export function Hero() {
         >
           <div className="mx-auto mb-5 h-px w-14 bg-rose-dust/70" />
           <p className="font-script text-2xl text-rose-dust drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] md:text-3xl">
-            Celebrations, crafted
+            Celebrations, crafted in Gwalior
           </p>
           <h1 className="mt-2 font-serif text-4xl font-medium leading-[1.15] text-ink drop-shadow-[0_2px_16px_rgba(0,0,0,0.5)] md:text-5xl">
             We Plan Moments You'll Remember Forever
           </h1>
-          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-ink/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)] md:text-base">
-            From dream weddings and destination celebrations to birthdays, anniversaries and
-            corporate events — we plan, design and manage every detail for you.
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-ink/90 drop-shadow-[0_1px_8px_rgba(0,0,0,0.45)] md:text-base">
+            From luxury weddings in Gwalior and royal destination celebrations to birthdays, anniversaries, and
+            corporate events — Dream City Events plans, designs, and manages every detail with elegance.
           </p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
             <motion.a

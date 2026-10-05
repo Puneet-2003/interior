@@ -1,0 +1,24 @@
+{
+  "name": "Dream City Events Gwalior — Wedding Planner & Event Management",
+  "short_name": "Dream City Events",
+  "description": "Premier wedding planner, artist management, and event management in Gwalior. Destination weddings, decoration, and celebrations.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0a08",
+  "theme_color": "#0b0a08",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "lifestyle",
+    "business",
+    "entertainment"
+  ],
+  "lang": "en-IN"
+}

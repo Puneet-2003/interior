@@ -7,19 +7,22 @@ export function MobileCta() {
       <a
         href={whatsappHref}
         target="_blank"
-        rel="noreferrer"
+        rel="noreferrer noopener"
+        aria-label="Chat with Dream City Events Gwalior on WhatsApp"
         className="flex items-center justify-center gap-2 bg-rose-dust py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-cream"
       >
         WhatsApp
       </a>
       <a
         href={companyPhoneHref}
+        aria-label={`Call Dream City Events Gwalior at ${company.phone}`}
         className="flex items-center justify-center gap-2 border-x border-cream-deep py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-ink"
       >
         Call
       </a>
       <a
         href="#contact"
+        aria-label="Request a customized event quotation from Dream City Events"
         className="flex items-center justify-center gap-2 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-rose-dust"
       >
         Get Quote

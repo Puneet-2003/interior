@@ -13,8 +13,11 @@ export function CaseStudy() {
           <div className="group relative overflow-hidden">
             <img
               src={caseStudy.image}
-              alt={`${caseStudy.title} celebration`}
+              alt={`${caseStudy.title} Royal Destination Wedding by Dream City Events Gwalior`}
               loading="lazy"
+              decoding="async"
+              width="600"
+              height="450"
               className="h-full min-h-[320px] w-full object-cover transition duration-700 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-cream/60 to-transparent" />

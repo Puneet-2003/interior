@@ -77,7 +77,11 @@ export function ContactFooter() {
             </h3>
             <address className="mt-5 space-y-2.5 text-sm not-italic text-ink-muted">
               <p>
-                <a href={companyPhoneHref} className="transition hover:text-rose-dust">
+                <a
+                  href={companyPhoneHref}
+                  aria-label={`Call Dream City Events at ${company.phone}`}
+                  className="transition hover:text-rose-dust"
+                >
                   {company.phone}
                 </a>
               </p>
@@ -85,19 +89,30 @@ export function ContactFooter() {
                 <a
                   href={whatsappHref}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
+                  aria-label="Chat with Dream City Events on WhatsApp"
                   className="transition hover:text-rose-dust"
                 >
                   WhatsApp us
                 </a>
               </p>
-              <p className="max-w-xs leading-relaxed">{companyAddressText}</p>
+              <p className="max-w-xs leading-relaxed">
+                <a
+                  href="https://maps.google.com/?q=Kalpi+Bridge+Colony+Morar+Gwalior+Madhya+Pradesh+474005"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  title="View Dream City Events office location in Morar, Gwalior on Google Maps"
+                  className="transition hover:text-rose-dust"
+                >
+                  {companyAddressText}
+                </a>
+              </p>
               {company.instagram && (
                 <p>
                   <a
                     href={company.instagram}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noreferrer noopener"
                     className="transition hover:text-rose-dust"
                   >
                     Instagram

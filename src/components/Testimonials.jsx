@@ -76,7 +76,9 @@ export function Testimonials() {
                   <motion.img
                     key={`${item.id}-${photo}`}
                     src={photo}
-                    alt=""
+                    alt={`Client review for Dream City Events Gwalior - ${item.names}`}
+                    loading="lazy"
+                    decoding="async"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}

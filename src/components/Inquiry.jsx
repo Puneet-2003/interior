@@ -128,15 +128,21 @@ export function Inquiry() {
                 value={form.name}
                 onChange={onChange}
                 required
-                placeholder="Your Name"
+                autoComplete="name"
+                aria-label="Your Full Name"
+                placeholder="Your Name *"
                 className={field}
               />
               <input
                 name="phone"
                 type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                aria-label="Phone or WhatsApp Number"
                 value={form.phone}
                 onChange={onChange}
-                placeholder="Phone Number"
+                placeholder="Phone / WhatsApp Number *"
+                required
                 className={field}
               />
               <Dropdown
@@ -153,6 +159,7 @@ export function Inquiry() {
                   value={form.guestsCustom}
                   onChange={onChange}
                   required
+                  aria-label="Custom number of guests"
                   placeholder="Enter number of guests"
                   className={field}
                 />
@@ -169,6 +176,7 @@ export function Inquiry() {
                   value={form.occasionCustom}
                   onChange={onChange}
                   required
+                  aria-label="Custom event or celebration type"
                   placeholder="Enter your event / celebration"
                   className={field}
                 />
@@ -177,7 +185,8 @@ export function Inquiry() {
                 name="preference"
                 value={form.preference}
                 onChange={onChange}
-                placeholder="Local Preference / Venue city"
+                aria-label="Preferred venue city or location (e.g. Gwalior, Udaipur, Goa)"
+                placeholder="Local Preference / Venue City (e.g. Gwalior, Udaipur)"
                 className={field}
               />
               <input

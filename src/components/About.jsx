@@ -96,7 +96,7 @@ export function About() {
               <div className="col-span-7 row-span-2 overflow-hidden shadow-xl">
                 <motion.img
                   src={main}
-                  alt="Celebration moment"
+                  alt="Luxury wedding celebration in Gwalior by Dream City Events"
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
                   viewport={{ once: true, margin: '-80px' }}
@@ -121,7 +121,9 @@ export function About() {
                 >
                   <img
                     src={src}
-                    alt=""
+                    alt={`Royal wedding and event decoration showcase ${i + 1} - Dream City Events Gwalior`}
+                    loading="lazy"
+                    decoding="async"
                     className="h-full min-h-[130px] w-full object-cover transition duration-700 group-hover:scale-105"
                   />
                 </motion.div>
@@ -138,7 +140,9 @@ export function About() {
               >
                 <img
                   src={src}
-                  alt=""
+                  alt={`Destination wedding and reception venue setup ${i + 3} - Dream City Events`}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full min-h-[120px] w-full object-cover transition duration-700 group-hover:scale-105"
                 />
               </motion.div>
@@ -155,7 +159,7 @@ export function About() {
               </h2>
             </div>
             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ink-muted md:text-lg">
-              Dream City Event is not just a decorator — we are your complete wedding partner. From
+              Dream City Events is not just a decorator — we are your complete wedding partner. From
               the first plan to the final execution, every detail is handled under one roof, so you
               never have to coordinate with multiple vendors.
             </p>
@@ -191,7 +195,9 @@ export function About() {
               <div className="group overflow-hidden lg:col-span-2">
                 <img
                   src={rest[4]}
-                  alt="A wedding celebration managed by Dream City Event"
+                  alt="A complete royal wedding celebration managed by Dream City Events Gwalior"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full min-h-[220px] w-full object-cover transition duration-700 group-hover:scale-105"
                 />
               </div>

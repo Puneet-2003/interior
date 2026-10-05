@@ -33,8 +33,11 @@ export function Destinations() {
             >
               <img
                 src={dest.image}
-                alt={`${dest.name} destination wedding`}
+                alt={`${dest.name} Destination Wedding by Dream City Events Gwalior`}
                 loading="lazy"
+                decoding="async"
+                width="400"
+                height="500"
                 className="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-cream via-cream/25 to-transparent" />

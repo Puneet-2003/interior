@@ -31,7 +31,8 @@ export function FinalCta() {
           <motion.a
             href={whatsappHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
+            aria-label="Chat with Dream City Events Gwalior on WhatsApp"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex bg-rose-dust px-7 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-cream transition hover:bg-rose-deep"
@@ -40,6 +41,7 @@ export function FinalCta() {
           </motion.a>
           <motion.a
             href="#contact"
+            aria-label="Request a free event consultation from Dream City Events"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex border border-rose-dust/60 px-7 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-ink transition hover:bg-rose-dust/15"
@@ -48,6 +50,7 @@ export function FinalCta() {
           </motion.a>
           <motion.a
             href={companyPhoneHref}
+            aria-label={`Call Dream City Events at ${company.phone}`}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex border border-cream-deep px-7 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-ink-muted transition hover:border-rose-dust/60 hover:text-ink"

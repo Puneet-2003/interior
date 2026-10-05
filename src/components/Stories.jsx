@@ -36,7 +36,9 @@ export function Stories() {
             >
               <img
                 src={src}
-                alt={`Story ${i + 1}`}
+                alt={`Wedding and event celebration portfolio image ${i + 1} by Dream City Events Gwalior`}
+                loading="lazy"
+                decoding="async"
                 className={`w-full object-cover transition duration-700 group-hover:scale-[1.03] ${
                   i % 5 === 0 ? 'aspect-[3/4]' : i % 3 === 0 ? 'aspect-square' : 'aspect-[4/5]'
                 }`}

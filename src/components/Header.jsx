@@ -73,6 +73,7 @@ export function Header() {
         <div className="flex items-center justify-end gap-3">
           <motion.a
             href={companyPhoneHref}
+            aria-label={`Call Dream City Events Gwalior at ${company.phone}`}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             className="hidden border border-rose-dust/50 px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-ink transition hover:bg-rose-dust/15 md:inline-flex"
@@ -82,7 +83,8 @@ export function Header() {
           <motion.a
             href={whatsappHref}
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
+            aria-label="Chat with Dream City Events Gwalior on WhatsApp"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             className="hidden bg-rose-dust px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-cream transition hover:bg-rose-deep md:inline-flex"
@@ -141,7 +143,8 @@ export function Header() {
             <a
               href={whatsappHref}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
+              aria-label="Chat with Dream City Events Gwalior on WhatsApp"
               className="border border-rose-dust/50 px-4 py-2.5 text-center text-ink"
               onClick={() => setOpen(false)}
             >

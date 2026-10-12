@@ -208,13 +208,14 @@ export const images = {
 
     // Destination 5: Jaisalmer (Rajasthan)
     jaisalmer: [
-      'https://res.cloudinary.com/ddelf4odl/image/upload/f_auto,q_auto,w_800/v1785321706/download_vadwhi.jpg',
-      'https://res.cloudinary.com/ddelf4odl/image/upload/f_auto,q_auto,w_800/v1785321706/download_2_a80bce.jpg',
-      'https://res.cloudinary.com/ddelf4odl/image/upload/f_auto,q_auto,w_800/v1785321039/download_rxyp1x.jpg',
-      'https://res.cloudinary.com/ddelf4odl/image/upload/f_auto,q_auto,w_800/v1785321706/See_The_Most_Stunning_Indian-American_Wedding_hxecdb.jpg',
-      'https://res.cloudinary.com/ddelf4odl/image/upload/f_auto,q_auto,w_800/v1785320822/Celebrations25_Festive25_WeddingWire2026_n3bd94.jpg',
-      'https://res.cloudinary.com/ddelf4odl/image/upload/f_auto,q_auto,w_800/v1785321706/Wedding_Photography_feuc26.jpg',
-      'https://res.cloudinary.com/ddelf4odl/image/upload/f_auto,q_auto,w_800/v1785321040/Flower_themed_Haldi___Haldi_Ideas___Haldi_Inspo___yh7xnc.jpg',
+        'https://res.cloudinary.com/nwqljqhb/image/upload/v1791785409/Jaisalmer_Twilight_Fort_Wedding.webp',
+        'https://res.cloudinary.com/nwqljqhb/image/upload/v1791785408/0f5bfd1a133dafcdb5e8fe1ea9bf24e6_converted.webp',
+        'https://res.cloudinary.com/nwqljqhb/image/upload/v1791785408/Jaisalmerimage3.webp',
+        'https://res.cloudinary.com/nwqljqhb/image/upload/v1791785407/images_1__converted.webp',
+        'https://res.cloudinary.com/nwqljqhb/image/upload/v1791785407/17704512341919edfe-25b6-4b00-8966-807145223d9f_converted.webp',
+        'https://res.cloudinary.com/nwqljqhb/image/upload/v1791785407/images_2__converted.webp',
+        'https://res.cloudinary.com/nwqljqhb/image/upload/v1791785407/images_converted.webp'
+    
     ],
 
     // Destination 6: Jim Corbett (Uttarakhand)

@@ -148,12 +148,12 @@ export const destinations = [
     text: 'Golden desert forts and starlit celebrations in the dunes.',
     image: getCoverImage(images.destinations?.jaisalmer, image.stage),
   },
-  // {
-  //   id: 'jim-corbett',
-  //   name: 'Jim Corbett',
-  //   text: 'Forest resorts and open-air functions surrounded by nature.',
-  //   image: getCoverImage(images.destinations?.['jim-corbett'] ?? images.destinations?.jimCorbett, image.decor),
-  // },
+  {
+    id: 'jim-corbett',
+    name: 'Jim Corbett',
+    text: 'Forest resorts and open-air functions surrounded by nature.',
+    image: getCoverImage(images.destinations?.['jim-corbett'] ?? images.destinations?.jimCorbett, image.decor),
+  },
 ]
 
 export const honeymoonPackages = [

@@ -8,7 +8,7 @@ const nav = [
   { label: 'Packages', href: '#packages' },
   { label: 'Destinations', href: '#destinations' },
   { label: 'Gallery', href: '#gallery' },
-  { label: 'About', href: '#about' },
+  { label: 'About Us', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -34,17 +34,17 @@ export function Header() {
           : 'bg-gradient-to-b from-cream/70 via-cream/30 to-transparent'
       }`}
     >
-      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-x-6 px-5 py-4 md:px-8 lg:grid-cols-[auto_1fr_auto]">
+      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-x-3 px-4 py-3.5 md:px-6 lg:grid-cols-[auto_1fr_auto] lg:px-5 xl:gap-x-6 xl:px-8 xl:py-4">
         <a href="#home" className="shrink-0 leading-tight">
           <span
-            className={`block whitespace-nowrap font-script text-3xl transition-colors md:text-5xl ${
+            className={`block whitespace-nowrap font-script text-3xl transition-colors md:text-4xl lg:text-[2rem] xl:text-4xl 2xl:text-5xl ${
               onHero ? 'text-ink' : 'text-rose-dust'
             }`}
           >
             {company.wordmark}
           </span>
           <span
-            className={`mt-0.5 block font-serif text-xs font-medium uppercase tracking-[0.35em] transition-colors md:text-sm ${
+            className={`mt-0.5 block font-serif text-[0.65rem] font-medium uppercase tracking-[0.3em] transition-colors xl:text-xs xl:tracking-[0.35em] ${
               onHero ? 'text-ink/80' : 'text-ink'
             }`}
           >
@@ -53,7 +53,7 @@ export function Header() {
         </a>
 
         <nav
-          className={`hidden items-center justify-center gap-7 text-sm font-medium uppercase tracking-[0.18em] transition-colors lg:flex ${
+          className={`hidden min-w-0 items-center justify-center gap-3.5 text-xs font-medium uppercase tracking-[0.1em] transition-colors lg:flex xl:gap-5 xl:text-[13px] xl:tracking-[0.14em] 2xl:gap-7 2xl:text-sm 2xl:tracking-[0.16em] ${
             onHero ? 'text-ink/90' : 'text-ink-muted'
           }`}
         >
@@ -61,7 +61,7 @@ export function Header() {
             <a
               key={item.label}
               href={item.href}
-              className={`transition-colors ${
+              className={`whitespace-nowrap transition-colors ${
                 onHero ? 'hover:text-ink' : 'hover:text-rose-dust'
               }`}
             >
@@ -70,13 +70,13 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center justify-end gap-3">
+        <div className="flex shrink-0 items-center justify-end gap-2 xl:gap-3">
           <motion.a
             href={companyPhoneHref}
             aria-label={`Call Dream City Events Gwalior at ${company.phone}`}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="hidden border border-rose-dust/50 px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-ink transition hover:bg-rose-dust/15 md:inline-flex"
+            className="hidden whitespace-nowrap border border-rose-dust/50 px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-ink transition hover:bg-rose-dust/15 md:inline-flex xl:px-4 xl:py-2.5 xl:tracking-[0.14em] 2xl:px-5 2xl:text-sm"
           >
             Call Now
           </motion.a>
@@ -87,7 +87,7 @@ export function Header() {
             aria-label="Chat with Dream City Events Gwalior on WhatsApp"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="hidden bg-rose-dust px-5 py-2.5 text-sm font-semibold uppercase tracking-[0.14em] text-cream transition hover:bg-rose-deep md:inline-flex"
+            className="hidden whitespace-nowrap bg-rose-dust px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-cream transition hover:bg-rose-deep md:inline-flex xl:px-4 xl:py-2.5 xl:tracking-[0.14em] 2xl:px-5 2xl:text-sm"
           >
             WhatsApp
           </motion.a>

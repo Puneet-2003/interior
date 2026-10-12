@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { fadeUp, staggerParent, staggerChild } from '../lib/motion'
 import { destinations } from '../data/siteContent'
+import { navigateTo } from '../lib/navigation'
 
 export function Destinations() {
   return (
@@ -26,9 +27,10 @@ export function Destinations() {
         >
           {destinations.map((dest) => (
             <motion.a
-              key={dest.name}
+              key={dest.id}
               variants={staggerChild}
-              href="#contact"
+              href={`/destinations/${dest.id}`}
+              onClick={(e) => navigateTo(`/destinations/${dest.id}`, e)}
               className="group relative block overflow-hidden border border-cream-deep"
             >
               <img
@@ -45,14 +47,23 @@ export function Destinations() {
                 <h3 className="font-serif text-2xl font-medium text-ink">{dest.name}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-ink-muted">{dest.text}</p>
                 <span className="mt-4 inline-block text-xs font-semibold uppercase tracking-[0.16em] text-rose-dust transition group-hover:tracking-[0.22em]">
-                  Explore Destination →
+                  View {dest.name} Gallery →
                 </span>
               </div>
             </motion.a>
           ))}
         </motion.div>
 
-        <motion.div {...fadeUp} className="mt-14 text-center">
+        <motion.div {...fadeUp} className="mt-14 flex flex-wrap items-center justify-center gap-4 text-center">
+          <motion.a
+            href="/destinations"
+            onClick={(e) => navigateTo('/destinations', e)}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex border border-rose-dust/60 bg-cream px-7 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-ink transition hover:border-rose-dust hover:bg-rose-dust/15"
+          >
+            Explore All Destination Galleries
+          </motion.a>
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.03 }}

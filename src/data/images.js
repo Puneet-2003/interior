@@ -13,9 +13,9 @@
  * instant, zero-latency delivery without external database network requests.
  */
 
-import { image, images } from './image'
+import { image, images, toImageList, getCoverImage } from './image'
 
-export { image, images }
+export { image, images, toImageList, getCoverImage }
 
 export const STORAGE_KEY = 'dhi-cloudinary-images'
 const EVENT = 'dhi-images-change'
@@ -30,59 +30,51 @@ export function isVideoUrl(url) {
   return VIDEO_EXTENSION.test(url) || url.includes('/video/upload/')
 }
 
-/** Keys match functionCategories item ids in functions.js */
-const weddingDefaults = {
-  'engagement-ring-ceremony': [
-    image.weddingBanner,
-    image.festive,
-  ],
-  'mehendi-haldi': [
-    image.haldi,
-    image.decor,
-  ],
-  'wedding-ceremony': [
-    image.phere,
-    image.florals,
-    image.talambralu,
-  ],
-  'baraat-reception': [
-    image.photography,
-    image.entry,
-    image.stage,
-  ],
+function toKebabCase(str) {
+  return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
 }
 
-/** Baby & family events category */
-const babyDefaults = {
-  'baby-shower-godh-bharai': [],
-  'naming-ceremony-naamkaran': [],
+function buildCategoryDefaults(sourceObj = {}) {
+  const result = {}
+  if (!sourceObj || typeof sourceObj !== 'object') return result
+  for (const [key, value] of Object.entries(sourceObj)) {
+    const kebab = toKebabCase(key)
+    const list = toImageList(value)
+    result[kebab] = list
+  }
+  return result
 }
 
-/** Religious events category */
-const religiousDefaults = {
-  'satyanarayan-katha': [],
-  'bhagwat-katha': [],
-  'sundarkand-path': [],
-}
+/** Keys match functionCategories item ids in functions.js, sourced directly from image.js */
+const weddingDefaults = buildCategoryDefaults(images.functions?.wedding)
+
+/** Baby & family events category, sourced directly from image.js */
+const babyDefaults = buildCategoryDefaults(images.functions?.baby)
+
+/** Religious events category, sourced directly from image.js */
+const religiousDefaults = buildCategoryDefaults(images.functions?.religious)
+
+/** Destination wedding categories — sourced directly from images.destinations in image.js */
+const destinationsDefaults = buildCategoryDefaults(images.destinations)
+
+/** Honeymoon destination categories — sourced directly from images.honeymoon in image.js */
+const honeymoonDefaults = buildCategoryDefaults(images.honeymoon)
 
 /** Default Cloudinary-ready image arrays keyed by page/section id */
 export const pageImages = {
   home: {
-    hero: [
-      // Web-friendly H.264 MP4 video delivery URL (compressed with q_auto, w_1280):
-      image.heroVideo,
-      // High-performance lightweight poster frame (~58 KB) extracted directly from the hero video:
-      image.heroPoster,
-    ],
-    about: images.about,
+    hero: toImageList(images.hero),
+    about: toImageList(images.about),
   },
   functions: {
     wedding: weddingDefaults,
     baby: babyDefaults,
     religious: religiousDefaults,
   },
-  stories: images.gallery,
-  testimonials: images.testimonials,
+  destinations: destinationsDefaults,
+  honeymoon: honeymoonDefaults,
+  stories: toImageList(images.instagram || images.gallery || images.stories),
+  testimonials: toImageList(images.testimonials),
 }
 
 function readMirror() {
@@ -132,21 +124,21 @@ export function getDefaultImages(path) {
   let cur = pageImages
   for (const p of parts) {
     if (cur == null || typeof cur !== 'object') return []
-    cur = Array.isArray(cur) ? cur : cur[p]
+    cur = Array.isArray(cur) ? cur : (cur[p] ?? cur[toKebabCase(p)])
   }
   return Array.isArray(cur) ? [...cur] : []
 }
 
 /**
- * Collect overview images for a category path like "functions.wedding"
- * by gathering images from each subcategory (unique, capped).
+ * Collect overview images for a category path like "functions.wedding",
+ * "destinations", or "honeymoon" by gathering images from each subcategory.
  */
-export function getCategoryOverviewImages(categoryPath, limit = 8) {
+export function getCategoryOverviewImages(categoryPath, limit = 14) {
   const parts = categoryPath.split('.')
   let cur = pageImages
   for (const p of parts) {
     if (cur == null || typeof cur !== 'object') return []
-    cur = Array.isArray(cur) ? cur : cur[p]
+    cur = Array.isArray(cur) ? cur : (cur[p] ?? cur[toKebabCase(p)])
   }
   if (Array.isArray(cur)) return cur.slice(0, limit)
 
@@ -176,7 +168,7 @@ function resolveNode(path) {
   let cur = pageImages
   for (const p of parts) {
     if (cur == null || typeof cur !== 'object') return null
-    cur = Array.isArray(cur) ? cur : cur[p]
+    cur = Array.isArray(cur) ? cur : (cur[p] ?? cur[toKebabCase(p)])
   }
   return cur ?? null
 }

@@ -1,4 +1,5 @@
 import { functionCategories } from './functions'
+import { destinations, honeymoonPackages } from './siteContent'
 
 /** Section paths owners can attach Cloudinary images to, grouped for the picker. */
 export const imageSectionGroups = [
@@ -7,6 +8,26 @@ export const imageSectionGroups = [
     options: [
       { path: 'home.hero', label: 'Hero' },
       { path: 'home.about', label: 'About' },
+    ],
+  },
+  {
+    label: 'Destination Weddings',
+    options: [
+      { path: 'destinations', label: 'All Destination Weddings — overview' },
+      ...destinations.map((dest) => ({
+        path: `destinations.${dest.id}`,
+        label: `Destination — ${dest.name}`,
+      })),
+    ],
+  },
+  {
+    label: 'Honeymoon Packages',
+    options: [
+      { path: 'honeymoon', label: 'All Honeymoon Packages — overview' },
+      ...honeymoonPackages.map((pkg) => ({
+        path: `honeymoon.${pkg.id}`,
+        label: `Honeymoon — ${pkg.name}`,
+      })),
     ],
   },
   ...functionCategories.map((cat) => ({

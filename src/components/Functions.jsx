@@ -37,6 +37,7 @@ export function Functions() {
 
   return (
     <section id="functions" className="relative overflow-hidden bg-blush py-24 md:py-32">
+      <span id="gallery" className="sr-only" aria-hidden="true" />
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
         style={{

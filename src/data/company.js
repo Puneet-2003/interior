@@ -9,8 +9,8 @@ export const company = {
   tagline: 'Events & Celebrations',
   phone: '+91 88276 88283',
   website: 'https://dreamcityeventsgwalior.com',
-  instagram: 'https://www.instagram.com/dreamcityeventsgwalior',
-  facebook: 'https://www.facebook.com/dreamcityeventsgwalior',
+  instagram: 'https://www.instagram.com/dream_city_event/',
+  facebook: 'https://www.facebook.com/profile.php?id=61591761215758',
   address: {
     line1: '1st Floor, Shop No. 2, Main Road, near Gagan Plaza, above Sky Gold Hair Salon',
     line2: 'Kalpi Bridge Colony, Mahaveer, Morar, Gwalior, Madhya Pradesh 474005',
@@ -27,4 +27,10 @@ export const company = {
 
 export const companyPhoneHref = `tel:${company.phone.replace(/[^\d+]/g, '')}`
 export const companyAddressText = `${company.address.line1}, ${company.address.line2}`
-export const whatsappHref = `https://wa.me/${String(import.meta.env.VITE_PHONE_NUMBER ?? '').replace(/[^\d]/g, '')}`
+// wa.me requires digits only, with country code and no "+"
+export const whatsappNumber = String(import.meta.env.VITE_PHONE_NUMBER || company.phone).replace(
+  /[^\d]/g,
+  '',
+)
+export const whatsappHref = `https://wa.me/${whatsappNumber}`
+

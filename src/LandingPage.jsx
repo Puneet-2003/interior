@@ -7,9 +7,7 @@ import { Packages } from './components/Packages'
 import { Destinations } from './components/Destinations'
 import { Honeymoon } from './components/Honeymoon'
 import { About } from './components/About'
-import { Stories } from './components/Stories'
 import { Functions } from './components/Functions'
-import { CaseStudy } from './components/CaseStudy'
 import { Process } from './components/Process'
 import { Testimonials } from './components/Testimonials'
 import { InstagramStrip } from './components/InstagramStrip'
@@ -32,9 +30,7 @@ export function LandingPage() {
         <Destinations />
         <Honeymoon />
         <About />
-        <Stories />
         <Functions />
-        <CaseStudy />
         <Process />
         <Testimonials />
         <InstagramStrip />

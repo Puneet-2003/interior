@@ -7,62 +7,48 @@
  * - Images reuse the existing Cloudinary assets already shown on the site.
  */
 
-import { image } from './image'
-
-const IMG = {
-  wedding: image.weddingBanner,
-  festive: image.festive,
-  haldi: image.haldi,
-  decor: image.decor,
-  phere: image.phere,
-  florals: image.florals,
-  talambralu: image.talambralu,
-  photography: image.photography,
-  entry: image.entry,
-  stage: image.stage,
-  couple: image.couple,
-}
+import { image, images, getCoverImage } from './image'
 
 export const services = [
   {
     title: 'Wedding Planning',
-    text: 'Complete planning and management of your wedding, from the first idea to the final farewell.',
-    image: IMG.phere,
+    text: 'End-to-end planning for a seamless wedding.',
+    image: getCoverImage(images.services?.weddingPlanning, image.phere),
   },
   {
     title: 'Wedding Decoration',
-    text: 'Themes, florals, lighting and stage décor designed around your story.',
-    image: IMG.haldi,
+    text: 'Bespoke themes, florals, lighting and stage décor.',
+    image: getCoverImage(images.services?.weddingDecoration ?? images.services?.decoration, image.haldi),
   },
   {
     title: 'Destination Weddings',
-    text: 'Venue, travel, stay and full event management at India’s most beautiful destinations.',
-    image: IMG.florals,
+    text: 'Venue, stay and management at top destinations.',
+    image: getCoverImage(images.services?.destinationWeddings ?? images.services?.destination, image.florals),
   },
   {
     title: 'Birthday & Anniversary Events',
-    text: 'Milestone celebrations styled with warmth, detail and personal touches.',
-    image: IMG.festive,
+    text: 'Milestone celebrations styled with personal touches.',
+    image: getCoverImage(images.services?.birthdayAnniversary, image.festive),
   },
   {
     title: 'Corporate Events',
-    text: 'Conferences, launches, award nights and team events, professionally produced.',
-    image: IMG.stage,
+    text: 'Conferences, launches and award nights, professionally produced.',
+    image: getCoverImage(images.services?.corporateEvents ?? images.services?.corporate, image.stage),
   },
   {
     title: 'Engagement & Pre-Wedding',
-    text: 'Haldi, mehndi, sangeet, cocktail and engagement functions, beautifully coordinated.',
-    image: IMG.talambralu,
+    text: 'Haldi, mehndi, sangeet and engagement coordination.',
+    image: getCoverImage(images.services?.engagementPreWedding, image.talambralu),
   },
   {
     title: 'Artist Management & Entertainment',
-    text: 'Bollywood star artists, TV performers, foreign (Russian) artists, live performers and special entries.',
-    image: IMG.entry,
+    text: 'Star artists, live performers and grand special entries.',
+    image: getCoverImage(images.services?.artistManagement, image.entry),
   },
   {
     title: 'Honeymoon Packages',
-    text: 'Curated romantic getaways to begin your forever, planned end to end.',
-    image: IMG.couple,
+    text: 'Curated romantic getaways planned end to end.',
+    image: getCoverImage(images.services?.honeymoonPackages ?? images.services?.honeymoon, image.couple),
   },
 ]
 
@@ -132,28 +118,100 @@ export const packages = [
 ]
 
 export const destinations = [
-  { name: 'Goa', text: 'Beachside pheras and sunset receptions by the Arabian Sea.', image: IMG.florals },
-  { name: 'Udaipur', text: 'Royal palaces and lakeside venues for a regal celebration.', image: IMG.phere },
-  { name: 'Jaipur', text: 'Heritage havelis and pink-city grandeur for your big day.', image: IMG.wedding },
-  { name: 'Rishikesh', text: 'Serene riverside vows in the foothills of the Himalayas.', image: IMG.festive },
-  { name: 'Jaisalmer', text: 'Golden desert forts and starlit celebrations in the dunes.', image: IMG.stage },
-  { name: 'Jim Corbett', text: 'Forest resorts and open-air functions surrounded by nature.', image: IMG.decor },
+  {
+    id: 'goa',
+    name: 'Goa',
+    text: 'Beachside pheras and sunset receptions by the Arabian Sea.',
+    image: getCoverImage(images.destinations?.goa, image.florals),
+  },
+  {
+    id: 'udaipur',
+    name: 'Udaipur',
+    text: 'Royal palaces and lakeside venues for a regal celebration.',
+    image: getCoverImage(images.destinations?.udaipur, image.phere),
+  },
+  {
+    id: 'jaipur',
+    name: 'Jaipur',
+    text: 'Heritage havelis and pink-city grandeur for your big day.',
+    image: getCoverImage(images.destinations?.jaipur, image.weddingBanner),
+  },
+  {
+    id: 'rishikesh',
+    name: 'Rishikesh',
+    text: 'Serene riverside vows in the foothills of the Himalayas.',
+    image: getCoverImage(images.destinations?.rishikesh, image.festive),
+  },
+  {
+    id: 'jaisalmer',
+    name: 'Jaisalmer',
+    text: 'Golden desert forts and starlit celebrations in the dunes.',
+    image: getCoverImage(images.destinations?.jaisalmer, image.stage),
+  },
+  // {
+  //   id: 'jim-corbett',
+  //   name: 'Jim Corbett',
+  //   text: 'Forest resorts and open-air functions surrounded by nature.',
+  //   image: getCoverImage(images.destinations?.['jim-corbett'] ?? images.destinations?.jimCorbett, image.decor),
+  // },
 ]
 
 export const honeymoonPackages = [
-  { name: 'Goa', duration: null, startingPrice: null, text: 'Beaches, shacks and slow sunsets for two.', image: IMG.florals },
-  { name: 'Kashmir', duration: null, startingPrice: null, text: 'Houseboats, valleys and snow-kissed views.', image: IMG.phere },
-  { name: 'Manali', duration: null, startingPrice: null, text: 'Mountain air, cafés and cosy stays.', image: IMG.festive },
-  { name: 'Bali', duration: null, startingPrice: null, text: 'Temples, beaches and private pool villas.', image: IMG.stage },
-  { name: 'Maldives', duration: null, startingPrice: null, text: 'Overwater villas and turquoise lagoons.', image: IMG.wedding },
-  { name: 'Dubai', duration: null, startingPrice: null, text: 'Skyline dinners, desert safaris and luxury malls.', image: IMG.decor },
+  {
+    id: 'goa',
+    name: 'Goa',
+    duration: null,
+    startingPrice: null,
+    text: 'Beaches, shacks and slow sunsets for two.',
+    image: getCoverImage(images.honeymoon?.goa, image.florals),
+  },
+  {
+    id: 'kashmir',
+    name: 'Kashmir',
+    duration: null,
+    startingPrice: null,
+    text: 'Houseboats, valleys and snow-kissed views.',
+    image: getCoverImage(images.honeymoon?.kashmir, image.phere),
+  },
+  {
+    id: 'manali',
+    name: 'Manali',
+    duration: null,
+    startingPrice: null,
+    text: 'Mountain air, cafés and cosy stays.',
+    image: getCoverImage(images.honeymoon?.manali, image.festive),
+  },
+  {
+    id: 'bali',
+    name: 'Bali',
+    duration: null,
+    startingPrice: null,
+    text: 'Temples, beaches and private pool villas.',
+    image: getCoverImage(images.honeymoon?.bali, image.stage),
+  },
+  {
+    id: 'maldives',
+    name: 'Maldives',
+    duration: null,
+    startingPrice: null,
+    text: 'Overwater villas and turquoise lagoons.',
+    image: getCoverImage(images.honeymoon?.maldives, image.weddingBanner),
+  },
+  {
+    id: 'dubai',
+    name: 'Dubai',
+    duration: null,
+    startingPrice: null,
+    text: 'Skyline dinners, desert safaris and luxury malls.',
+    image: getCoverImage(images.honeymoon?.dubai, image.decor),
+  },
 ]
 
 /** Placeholder case study — replace with a real project when details are available. */
 export const caseStudy = {
   placeholder: true,
   title: 'Royal Wedding — Udaipur',
-  image: IMG.phere,
+  image: getCoverImage(images.destinations?.udaipur, image.phere),
   stats: [
     { value: '350', label: 'Guests' },
     { value: '4', label: 'Functions' },

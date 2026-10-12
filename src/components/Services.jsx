@@ -1,6 +1,13 @@
 import { motion } from 'framer-motion'
 import { fadeUp, staggerParent, staggerChild } from '../lib/motion'
 import { services } from '../data/siteContent'
+import { navigateTo } from '../lib/navigation'
+
+function getServiceHref(title) {
+  if (title === 'Destination Weddings') return '/destinations'
+  if (title === 'Honeymoon Packages') return '/honeymoon'
+  return '#contact'
+}
 
 export function Services() {
   return (
@@ -24,33 +31,39 @@ export function Services() {
           viewport={{ once: true, margin: '-60px' }}
           className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {services.map((service) => (
-            <motion.a
-              key={service.title}
-              variants={staggerChild}
-              href="#contact"
-              className="group flex flex-col border border-cream-deep bg-blush transition hover:border-rose-dust/70"
-            >
-              <div className="overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={`${service.title} - Dream City Events Gwalior`}
-                  loading="lazy"
-                  decoding="async"
-                  width="400"
-                  height="300"
-                  className="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="font-serif text-xl font-medium text-ink">{service.title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-muted">{service.text}</p>
-                <span className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-rose-dust transition group-hover:tracking-[0.22em]">
-                  Explore Service →
-                </span>
-              </div>
-            </motion.a>
-          ))}
+          {services.map((service) => {
+            const href = getServiceHref(service.title)
+            const isGalleryPage = href.startsWith('/')
+
+            return (
+              <motion.a
+                key={service.title}
+                variants={staggerChild}
+                href={href}
+                onClick={isGalleryPage ? (e) => navigateTo(href, e) : undefined}
+                className="group flex flex-col border border-cream-deep bg-blush transition hover:border-rose-dust/70"
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={`${service.title} - Dream City Events Gwalior`}
+                    loading="lazy"
+                    decoding="async"
+                    width="400"
+                    height="533"
+                    className="aspect-[3/4] w-full object-cover object-center transition duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-4">
+                  <h3 className="font-serif text-lg font-medium leading-snug text-ink">{service.title}</h3>
+                  <p className="mt-1 flex-1 text-xs leading-snug text-ink-muted line-clamp-2">{service.text}</p>
+                  <span className="mt-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-rose-dust transition group-hover:tracking-[0.22em]">
+                    {isGalleryPage ? 'View Gallery →' : 'Explore Service →'}
+                  </span>
+                </div>
+              </motion.a>
+            )
+          })}
         </motion.div>
       </div>
     </section>

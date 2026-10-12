@@ -2,24 +2,26 @@ import { motion } from 'framer-motion'
 import { fadeUp } from '../lib/motion'
 import { SecretOwnerTrigger } from './SecretOwnerTrigger'
 import { company, companyPhoneHref, companyAddressText, whatsappHref } from '../data/company'
+import { navigateTo } from '../lib/navigation'
 
 const quickLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Services', href: '#services' },
-  { label: 'Packages', href: '#packages' },
-  { label: 'Destinations', href: '#destinations' },
-  { label: 'Gallery', href: '#gallery' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/#home' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Packages', href: '/#packages' },
+  { label: 'Destinations', href: '/destinations' },
+  { label: 'Honeymoons', href: '/honeymoon' },
+  { label: 'Gallery', href: '/#gallery' },
+  { label: 'About Us', href: '/#about' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 const serviceLinks = [
-  'Wedding Planning',
-  'Destination Weddings',
-  'Decoration',
-  'Corporate Events',
-  'Birthday Events',
-  'Honeymoon Packages',
+  { label: 'Wedding Planning', href: '/#services' },
+  { label: 'Destination Weddings', href: '/destinations' },
+  { label: 'Decoration', href: '/#services' },
+  { label: 'Corporate Events', href: '/#services' },
+  { label: 'Birthday Events', href: '/#services' },
+  { label: 'Honeymoon Packages', href: '/honeymoon' },
 ]
 
 export function ContactFooter() {
@@ -48,7 +50,11 @@ export function ContactFooter() {
             <ul className="mt-5 space-y-2.5 text-sm text-ink-muted">
               {quickLinks.map((l) => (
                 <li key={l.label}>
-                  <a href={l.href} className="transition hover:text-rose-dust">
+                  <a
+                    href={l.href}
+                    onClick={(e) => navigateTo(l.href, e)}
+                    className="transition hover:text-rose-dust"
+                  >
                     {l.label}
                   </a>
                 </li>
@@ -61,10 +67,14 @@ export function ContactFooter() {
               Services
             </h3>
             <ul className="mt-5 space-y-2.5 text-sm text-ink-muted">
-              {serviceLinks.map((label) => (
-                <li key={label}>
-                  <a href="#services" className="transition hover:text-rose-dust">
-                    {label}
+              {serviceLinks.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    onClick={(e) => navigateTo(item.href, e)}
+                    className="transition hover:text-rose-dust"
+                  >
+                    {item.label}
                   </a>
                 </li>
               ))}
@@ -139,14 +149,15 @@ export function ContactFooter() {
           <p className="text-xs text-ink-muted/70">
             © <SecretOwnerTrigger /> {company.name}. Crafted for celebrations.
           </p>
-          <motion.a
-            href="#home"
+          <motion.button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex border border-rose-dust/40 px-5 py-2.5 text-sm font-medium uppercase tracking-[0.14em] text-ink hover:border-rose-dust hover:bg-rose-dust hover:text-cream"
           >
             Back to top
-          </motion.a>
+          </motion.button>
         </div>
       </div>
     </footer>

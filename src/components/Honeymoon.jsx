@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { fadeUp, staggerParent, staggerChild } from '../lib/motion'
 import { honeymoonPackages } from '../data/siteContent'
+import { navigateTo } from '../lib/navigation'
 
 export function Honeymoon() {
   return (
@@ -28,9 +29,10 @@ export function Honeymoon() {
         >
           {honeymoonPackages.map((pkg) => (
             <motion.a
-              key={pkg.name}
+              key={pkg.id}
               variants={staggerChild}
-              href="#contact"
+              href={`/honeymoon/${pkg.id}`}
+              onClick={(e) => navigateTo(`/honeymoon/${pkg.id}`, e)}
               className="group flex flex-col border border-cream-deep bg-blush transition hover:border-rose-dust/70"
             >
               <div className="overflow-hidden">
@@ -39,32 +41,52 @@ export function Honeymoon() {
                   alt={`${pkg.name} Honeymoon Tour Package - Dream City Events Gwalior`}
                   loading="lazy"
                   decoding="async"
-                  width="480"
-                  height="300"
-                  className="aspect-[16/10] w-full object-cover transition duration-700 group-hover:scale-105"
+                  width="400"
+                  height="500"
+                  className="aspect-[4/5] w-full object-cover object-center transition duration-700 group-hover:scale-105"
                 />
               </div>
-              <div className="flex flex-1 flex-col p-6">
+              <div className="flex flex-1 flex-col p-4">
                 <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="font-serif text-2xl font-medium text-ink">{pkg.name}</h3>
+                  <h3 className="font-serif text-xl font-medium text-ink">{pkg.name}</h3>
                   {pkg.duration && (
                     <span className="text-xs uppercase tracking-[0.14em] text-ink-muted">
                       {pkg.duration}
                     </span>
                   )}
                 </div>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-muted">{pkg.text}</p>
-                <p className="mt-4 text-sm font-medium text-rose-dust">
+                <p className="mt-1 flex-1 text-xs leading-snug text-ink-muted line-clamp-2">{pkg.text}</p>
+                <p className="mt-2.5 text-xs font-medium text-rose-dust">
                   {pkg.startingPrice
                     ? `Starting from ₹${pkg.startingPrice.toLocaleString('en-IN')}`
                     : 'Itinerary & pricing on request'}
                 </p>
-                <span className="mt-4 text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted transition group-hover:text-rose-dust">
-                  View Package →
+                <span className="mt-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-muted transition group-hover:text-rose-dust">
+                  View {pkg.name} Gallery →
                 </span>
               </div>
             </motion.a>
           ))}
+        </motion.div>
+
+        <motion.div {...fadeUp} className="mt-14 flex flex-wrap items-center justify-center gap-4 text-center">
+          <motion.a
+            href="/honeymoon"
+            onClick={(e) => navigateTo('/honeymoon', e)}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex border border-rose-dust/60 bg-blush px-7 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-ink transition hover:border-rose-dust hover:bg-rose-dust/15"
+          >
+            Explore All Honeymoon Galleries
+          </motion.a>
+          <motion.a
+            href="#contact"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex bg-rose-dust px-7 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-cream transition hover:bg-rose-deep"
+          >
+            Plan My Honeymoon
+          </motion.a>
         </motion.div>
       </div>
     </section>

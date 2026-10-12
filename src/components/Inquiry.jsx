@@ -3,12 +3,9 @@ import { motion } from 'framer-motion'
 import { fadeUp } from '../lib/motion'
 import { Dropdown } from './Dropdown'
 import { celebrationGroups, CUSTOM_EVENT } from '../data/celebrations'
-import { company } from '../data/company'
+import { company, whatsappNumber } from '../data/company'
 
 const CUSTOM_GUESTS = 'Custom'
-
-// wa.me requires digits only, with country code and no "+"
-const whatsappNumber = String(import.meta.env.VITE_PHONE_NUMBER ?? '').replace(/[^\d]/g, '')
 
 const guestGroups = [{ options: ['20', '50', '100', '150+', CUSTOM_GUESTS] }]
 
@@ -123,9 +120,23 @@ export function Inquiry() {
           </div>
 
           {sent ? (
-            <p className="mt-10 text-center font-serif text-xl text-ink-muted">
-              Thank you — we will be in touch soon.
-            </p>
+            <div className="mt-10 text-center">
+              <p className="font-serif text-xl text-ink-muted">
+                Thank you — we will be in touch soon.
+              </p>
+              <motion.button
+                type="button"
+                onClick={() => {
+                  setForm(initial)
+                  setSent(false)
+                }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="mt-6 inline-flex border border-rose-dust/50 px-8 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-rose-dust transition hover:border-rose-dust hover:bg-rose-dust hover:text-cream"
+              >
+                Send Another Quote
+              </motion.button>
+            </div>
           ) : (
             <form onSubmit={onSubmit} className="mx-auto mt-10 max-w-md space-y-5">
               <input
